@@ -4,5 +4,5 @@ People in this project:
 
 * Mihail Kirilov
 * Atanas Kurtakov
-* ...
+* Georgi Stoilov
 * ...
