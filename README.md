@@ -54,5 +54,5 @@
 
 * Mihail Kirilov
 * Atanas Kurtakov
-* ...
+* Georgi Stoilov
 * ...
