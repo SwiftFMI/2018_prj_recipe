@@ -14,6 +14,8 @@
 		2330CA65219C697A00E95BE3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2330CA63219C697A00E95BE3 /* LaunchScreen.storyboard */; };
 		2330CA70219C697A00E95BE3 /* RecipeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2330CA6F219C697A00E95BE3 /* RecipeTests.swift */; };
 		2330CA7B219C697A00E95BE3 /* RecipeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2330CA7A219C697A00E95BE3 /* RecipeUITests.swift */; };
+		23F70A0221DE919000DDF026 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 23F70A0121DE919000DDF026 /* GoogleService-Info.plist */; };
+		60D2A58B9A40625A8EC19649 /* Pods_Recipe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1224070E000FF020D0ED5C56 /* Pods_Recipe.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1224070E000FF020D0ED5C56 /* Pods_Recipe.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Recipe.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2330CA57219C697600E95BE3 /* Recipe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Recipe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2330CA5A219C697700E95BE3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2330CA5C219C697700E95BE3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -47,6 +50,9 @@
 		2330CA76219C697A00E95BE3 /* RecipeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RecipeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2330CA7A219C697A00E95BE3 /* RecipeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeUITests.swift; sourceTree = "<group>"; };
 		2330CA7C219C697A00E95BE3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		23F70A0121DE919000DDF026 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		6A7A0CC0F038DF56FC235EA9 /* Pods-Recipe.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Recipe.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Recipe/Pods-Recipe.debug.xcconfig"; sourceTree = "<group>"; };
+		7EDF995F694653170552A7D6 /* Pods-Recipe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Recipe.release.xcconfig"; path = "Pods/Target Support Files/Pods-Recipe/Pods-Recipe.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +60,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				60D2A58B9A40625A8EC19649 /* Pods_Recipe.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,6 +88,8 @@
 				2330CA6E219C697A00E95BE3 /* RecipeTests */,
 				2330CA79219C697A00E95BE3 /* RecipeUITests */,
 				2330CA58219C697600E95BE3 /* Products */,
+				96FA0428A59AABF5D9D8D901 /* Pods */,
+				DDF7BC8BE79B4E999B89DFF9 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -98,6 +107,7 @@
 			isa = PBXGroup;
 			children = (
 				2330CA5A219C697700E95BE3 /* AppDelegate.swift */,
+				23F70A0121DE919000DDF026 /* GoogleService-Info.plist */,
 				2330CA5C219C697700E95BE3 /* ViewController.swift */,
 				2330CA5E219C697700E95BE3 /* Main.storyboard */,
 				2330CA61219C697A00E95BE3 /* Assets.xcassets */,
@@ -125,6 +135,23 @@
 			path = RecipeUITests;
 			sourceTree = "<group>";
 		};
+		96FA0428A59AABF5D9D8D901 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				6A7A0CC0F038DF56FC235EA9 /* Pods-Recipe.debug.xcconfig */,
+				7EDF995F694653170552A7D6 /* Pods-Recipe.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		DDF7BC8BE79B4E999B89DFF9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1224070E000FF020D0ED5C56 /* Pods_Recipe.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -132,9 +159,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2330CA7F219C697A00E95BE3 /* Build configuration list for PBXNativeTarget "Recipe" */;
 			buildPhases = (
+				307E4AAAC6EE71B2515F2B6F /* [CP] Check Pods Manifest.lock */,
 				2330CA53219C697600E95BE3 /* Sources */,
 				2330CA54219C697600E95BE3 /* Frameworks */,
 				2330CA55219C697600E95BE3 /* Resources */,
+				825030D1F05D3493A5DF01CA /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -230,6 +259,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2330CA65219C697A00E95BE3 /* LaunchScreen.storyboard in Resources */,
+				23F70A0221DE919000DDF026 /* GoogleService-Info.plist in Resources */,
 				2330CA62219C697A00E95BE3 /* Assets.xcassets in Resources */,
 				2330CA60219C697700E95BE3 /* Main.storyboard in Resources */,
 			);
@@ -250,6 +280,59 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		307E4AAAC6EE71B2515F2B6F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Recipe-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		825030D1F05D3493A5DF01CA /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Recipe/Pods-Recipe-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Recipe/Pods-Recipe-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		2330CA53219C697600E95BE3 /* Sources */ = {
@@ -430,6 +513,7 @@
 		};
 		2330CA80219C697A00E95BE3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6A7A0CC0F038DF56FC235EA9 /* Pods-Recipe.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -448,6 +532,7 @@
 		};
 		2330CA81219C697A00E95BE3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7EDF995F694653170552A7D6 /* Pods-Recipe.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
