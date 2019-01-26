@@ -18,6 +18,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         FirebaseApp.configure()
+        
+        var ref: DatabaseReference!
+        ref = Database.database().reference(withPath: "/")
+        print("Hello World")
+        ref.child("user").observe(.childAdded) { (snapshot) in
+            print(snapshot)
+            print(snapshot.children)
+            print(snapshot.childrenCount)
+            print(snapshot.childSnapshot(forPath: "some"))
+            print(snapshot.exists())
+            print(snapshot.hasChild("/"))
+            print(snapshot.key)
+            print(snapshot.value)
+            1+1
+        }
+        ref.child("user").observe(.childMoved) { (snapshot) in
+            print(snapshot)
+        }
+        ref.child("user").observe(.childRemoved) { (snapshot) in
+            print(snapshot)
+        }
+        ref.child("user").observe(.childChanged) { (snapshot) in
+            print(snapshot)
+        }
         return true
     }
 
