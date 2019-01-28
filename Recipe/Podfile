@@ -12,6 +12,7 @@ target 'Recipe' do
   pod 'Firebase/Auth'
   # Storage
   pod 'Firebase/Storage'
-  
+  # Tabbar
+  pod 'RAMAnimatedTabBarController'
 
 end
