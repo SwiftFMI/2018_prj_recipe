@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--About Us-->
+        <scene sceneID="vR8-3e-YUy">
+            <objects>
+                <viewController storyboardIdentifier="AboutPageController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="tDb-AU-3au" customClass="AboutPageController" customModule="Recipe" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Fkd-4s-A9Q">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="1" green="0.2476124254" blue="0.93243039790000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <viewLayoutGuide key="safeArea" id="6ej-AI-Pyb"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="About Us" image="info.png" id="DME-ro-YJQ" customClass="RAMAnimatedTabBarItem" customModule="RAMAnimatedTabBarController">
+                        <connections>
+                            <outlet property="animation" destination="cNu-Se-Yfm" id="6Sl-9W-Wcq"/>
+                        </connections>
+                    </tabBarItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="J4T-hF-zjU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="cNu-Se-Yfm" customClass="RAMRightRotationAnimation" customModule="RAMAnimatedTabBarController"/>
+            </objects>
+            <point key="canvasLocation" x="3665" y="-522"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="info.png" width="25" height="25"/>
+    </resources>
+</document>
