@@ -10,10 +10,10 @@ import Foundation;
 import UIKit;
 
 class ShoppingListController: UIViewController,UITableViewDelegate,UITableViewDataSource {
-	let mockData = [ShoppingListData(name: "Спанак", count: 2, units: "кутии", imagePath: "img.png"),
-					ShoppingListData(name: "Чери домати", count: 100, units: "гр.", imagePath: "img.png"),
-					ShoppingListData(name: "Картофи", count: 1, units: "кг.", imagePath: "img.png"),
-					ShoppingListData(name: "Свинско месо", count: 300, units: "гр.", imagePath: "img.png")];
+	let mockData = [ShoppingListData(name: "Спанак", count: 2, units: "кутии", imagePath: "Apple"),
+					ShoppingListData(name: "Чери домати", count: 100, units: "гр.", imagePath: "Apple"),
+					ShoppingListData(name: "Картофи", count: 1, units: "кг.", imagePath: "Apple"),
+					ShoppingListData(name: "Свинско месо", count: 300, units: "гр.", imagePath: "Apple")];
 	@IBOutlet weak var table: UITableView!
 	
 	public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
