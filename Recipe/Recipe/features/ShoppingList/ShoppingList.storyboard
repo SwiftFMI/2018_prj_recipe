@@ -62,6 +62,9 @@
                                                             <rect key="frame" x="213" y="0.0" width="38.5" height="79"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                             <state key="normal" title="+"/>
+                                                            <connections>
+                                                                <action selector="addQuantity:" destination="3hT-lq-drf" eventType="touchUpInside" id="gxi-5D-0kT"/>
+                                                            </connections>
                                                         </button>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="PJQ-re-a9T">
                                                             <rect key="frame" x="259.5" y="0.0" width="76.5" height="79"/>
@@ -84,6 +87,9 @@
                                                             <rect key="frame" x="344" y="0.0" width="38" height="79"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                             <state key="normal" title="-"/>
+                                                            <connections>
+                                                                <action selector="removeQuantity:" destination="3hT-lq-drf" eventType="touchUpInside" id="Ved-bQ-J6c"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                     <constraints>
@@ -104,6 +110,7 @@
                                                 <constraint firstItem="bGb-iI-yHm" firstAttribute="leading" secondItem="LUt-cm-VoW" secondAttribute="leading" constant="16" id="tKo-JR-Oqa"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <gestureRecognizers/>
                                         <connections>
                                             <outlet property="itemCount" destination="Ly9-NG-PWQ" id="7Qa-Yz-TTY"/>
                                             <outlet property="itemImage" destination="2zg-w2-hrt" id="Ydd-O4-Kls"/>
@@ -142,6 +149,11 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QCB-li-0Rz" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <customObject id="8Wq-TT-h1O" customClass="RAMBounceAnimation" customModule="RAMAnimatedTabBarController"/>
+                <swipeGestureRecognizer direction="left" id="C2l-s0-ABS">
+                    <connections>
+                        <action selector="swipeToRemoveHandler:" destination="Zb4-8z-455" id="iXb-ZJ-S9r"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2852.1739130434785" y="-522.32142857142856"/>
         </scene>

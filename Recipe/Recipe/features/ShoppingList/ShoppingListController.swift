@@ -10,7 +10,7 @@ import Foundation;
 import UIKit;
 
 class ShoppingListController: UIViewController,UITableViewDelegate,UITableViewDataSource {
-	let mockData = [ShoppingListData(name: "Спанак", count: 2, units: "кутии", imagePath: "Apple"),
+	var mockData = [ShoppingListData(name: "Спанак", count: 2, units: "кутии", imagePath: "Apple"),
 					ShoppingListData(name: "Чери домати", count: 100, units: "гр.", imagePath: "Apple"),
 					ShoppingListData(name: "Картофи", count: 1, units: "кг.", imagePath: "Apple"),
 					ShoppingListData(name: "Свинско месо", count: 300, units: "гр.", imagePath: "Apple")];
@@ -27,9 +27,21 @@ class ShoppingListController: UIViewController,UITableViewDelegate,UITableViewDa
 		
 		return cell;
 	}
+	@objc func swipeToRemoveHandler(_ sender: UISwipeGestureRecognizer) {
+		if sender.state == UIGestureRecognizer.State.ended {
+			let location = sender.location(in: self.table)
+			if let indexPath = table.indexPathForRow(at: location) {
+				mockData.remove(at: indexPath.row);
+				table.deleteRows(at: [indexPath], with: .left);
+			}
+		}
+	}
 	
 	override func viewDidLoad() {
 		super.viewDidLoad();
+		let recognizer = UISwipeGestureRecognizer(target: self, action:#selector(swipeToRemoveHandler(_:)));
+		recognizer.direction = .left;
+		self.table.addGestureRecognizer(recognizer);
 	}
 }
 
@@ -45,6 +57,27 @@ class ShoppingListTableRow: UITableViewCell {
 		self.imageView?.image = data.image;
 		self.units?.text = data.units;
 	}
+	
+	@IBAction func addQuantity(_ sender: UIButton) {
+		self.itemCount.text = "\(Int(self.itemCount.text!)! + findDelta())";
+	}
+	
+	@IBAction func removeQuantity(_ sender: UIButton) {
+		self.itemCount.text = "\(Int(self.itemCount.text!)! - findDelta())";
+	}
+	
+	func findDelta()->Int{
+		switch(self.units?.text){
+		case "кг.": return 1;
+		case "гр.":
+			if let len = self.itemCount.text?.count {
+				return NSDecimalNumber(decimal: pow(10,len-1)).intValue;
+			}else{
+				return 1;
+			}
+		default: return 1;
+		}
+	}
 }
 
 struct ShoppingListData {
@@ -57,17 +90,5 @@ struct ShoppingListData {
 		self.itemCount = itemCount;
 		self.units = units;
 		self.image = UIImage(named: imageName);
-		
-		//read from Documents folder
-//		let documentDirectory = FileManager.SearchPathDirectory.documentDirectory;
-//		let userDomainMask = FileManager.SearchPathDomainMask.userDomainMask;
-//		let paths = NSSearchPathForDirectoriesInDomains(documentDirectory, userDomainMask, true);
-//		if let dirPath = paths.first
-//		{
-//			let imageURL = URL(fileURLWithPath: dirPath).appendingPathComponent(imageName);
-//			self.image = UIImage(named: imagePath);
-//		}else{
-//			self.image = nil;
-//		}
 	}
 }
