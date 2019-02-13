@@ -14,10 +14,7 @@ target 'Recipe' do
   pod 'Firebase/Storage'
   # Tabbar
   pod 'RAMAnimatedTabBarController'
-  #Disk-storage persister
-  pod 'Disk', '~> 0.4.0'
-	# Easy pop up
-	pod 'EasyPopUp'
-	#search with suggestions
-	pod 'SearchTextField'
+  # Discover Mode
+  use_frameworks!
+  pod 'Koloda'
 end
