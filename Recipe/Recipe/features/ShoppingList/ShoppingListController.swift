@@ -71,7 +71,7 @@ class ShoppingListController: UIViewController,UITableViewDelegate,UITableViewDa
 		config.cornerRadius = CGFloat(20);
 		config.blurBackground = true;
 		config.blurRadius = CGFloat(10);
-		let popupVC = self.storyboard?.instantiateViewController(withIdentifier: "popupDialog") as! PopupDialogController
+		let popupVC = self.storyboard?.instantiateViewController(withIdentifier: "popupDialog") as! PopupDialogController;
 		let easePopUp = EasyViewControllerPopup(sourceViewController: self, destinationViewController: popupVC,config:config);
 		
 		easePopUp.showVCAsPopup();

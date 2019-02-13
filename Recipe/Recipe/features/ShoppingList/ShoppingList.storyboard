@@ -13,7 +13,7 @@
         <!--Popup Dialog Controller-->
         <scene sceneID="4ql-yT-Eyk">
             <objects>
-                <viewController storyboardIdentifier="popupDialog" useStoryboardIdentifierAsRestorationIdentifier="YES" id="8Yo-x1-wdW" customClass="PopupDialogController" customModule="Recipe" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="popupDialog" useStoryboardIdentifierAsRestorationIdentifier="YES" id="8Yo-x1-wdW" customClass="PopupDialogController" customModule="Recipe" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="oEK-Y9-NY9">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

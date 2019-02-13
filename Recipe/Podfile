@@ -15,6 +15,11 @@ target 'Recipe' do
   # Tabbar
   pod 'RAMAnimatedTabBarController'
   # Discover Mode
-  use_frameworks!
   pod 'Koloda'
+  pod 'Disk'
+  # Easy pop up
+  pod 'EasyPopUp'
+  #search with suggestions
+  pod 'SearchTextField'
 end
+
