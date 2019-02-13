@@ -18,7 +18,6 @@ class SwipeCardView: UIView {
     }
     */
     
-    
     @IBOutlet var contentView: UIView!
     
     @IBOutlet weak var recipeImage: UIImageView!

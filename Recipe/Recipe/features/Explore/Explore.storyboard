@@ -85,14 +85,43 @@
                             <outlet property="animation" destination="foL-HZ-azM" id="Z63-kI-L4H"/>
                         </connections>
                     </tabBarItem>
+                    <navigationItem key="navigationItem" id="Owb-fA-V9W"/>
                     <connections>
                         <outlet property="kolodaView" destination="CjN-6H-y6I" id="hcw-7m-3jh"/>
+                        <segue destination="f92-G2-6lQ" kind="showDetail" identifier="fullRecipe" id="8h7-xc-Nae"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9AM-uU-pTw" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <customObject id="foL-HZ-azM" customClass="RAMRightRotationAnimation" customModule="RAMAnimatedTabBarController"/>
             </objects>
-            <point key="canvasLocation" x="665" y="-522"/>
+            <point key="canvasLocation" x="460" y="-522"/>
+        </scene>
+        <!--Full Recipe View Controller-->
+        <scene sceneID="Wru-xG-2bb">
+            <objects>
+                <viewController id="f92-G2-6lQ" customClass="FullRecipeViewController" customModule="Recipe" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Bdg-al-Ggy">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fIr-pI-XDd">
+                                <rect key="frame" x="86" y="310" width="150" height="58"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="sBV-tv-fup"/>
+                    </view>
+                    <connections>
+                        <outlet property="recipeName" destination="fIr-pI-XDd" id="v38-x2-NIZ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JF0-al-krh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1485.5999999999999" y="-522.41379310344826"/>
         </scene>
     </scenes>
     <resources>

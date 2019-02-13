@@ -28,17 +28,43 @@ class ExploreController: UIViewController {
         kolodaView.dataSource = self
         kolodaView.delegate = self
         
+        kolodaView.layer.cornerRadius = 5
+        kolodaView.layer.masksToBounds = true
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "fullRecipe" {
+            print("Hello")
+            //let navigationController = segue.destination as! UINavigationController
+            //let targetController = navigationController.topViewController as? FullRecipeViewController
+            if let nextViewController = segue.destination as? FullRecipeViewController {
+                nextViewController.name = self.mockData[self.kolodaView.currentCardIndex].name
+            }
+            //targetController?.image?.image = self.mockData[self.kolodaView.currentCardIndex].image
+        }
+    }
 }
 
 extension ExploreController: KolodaViewDelegate {
     func kolodaDidRunOutOfCards(_ koloda: KolodaView) {
-        koloda.reloadData()
+        print("OK")
+        kolodaView.reloadData()
+        
+        /*let position = kolodaView.currentCardIndex
+        for i in 0...4 {
+            mockData.append(mockData[i])
+        }
+
+        kolodaView.insertCardAtIndexRange(position..<position + 5, animated: true)
+        Add more cards...
+        */
     }
     
     func koloda(_ koloda: KolodaView, didSelectCardAt index: Int) {
         // When clicked on the recipe, needs to go to screen for it.
+        performSegue(withIdentifier: "fullRecipe", sender: nil)
+        //prepare(for: , sender: <#T##Any?#>)
+        
     }
 }
 
