@@ -14,5 +14,7 @@ target 'Recipe' do
   pod 'Firebase/Storage'
   # Tabbar
   pod 'RAMAnimatedTabBarController'
-
+  # Discover Mode
+  use_frameworks!
+  pod 'Koloda'
 end

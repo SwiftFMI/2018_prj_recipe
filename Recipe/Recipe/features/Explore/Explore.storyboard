@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
+    <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -15,9 +15,69 @@
             <objects>
                 <viewController storyboardIdentifier="ExploreController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Eyw-pI-isK" customClass="ExploreController" customModule="Recipe" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="b2V-WW-ssB">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="0.055299440290000001" blue="0.10882843809999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CjN-6H-y6I" customClass="KolodaView" customModule="Koloda">
+                                <rect key="frame" x="25" y="159.00000000000003" width="325" height="511.66666666666674"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DISCOVER" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wdn-Gs-vHT">
+                                <rect key="frame" x="50" y="59" width="275" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="8tb-dd-Dxl"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Georgia" family="Georgia" pointSize="30"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="~" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ufo-H8-jyx">
+                                <rect key="frame" x="50" y="94" width="275" height="10"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="10" id="FPu-iP-7zd"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Georgia" family="Georgia" pointSize="21"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NO IDEA TODAY?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1SC-lH-CDf">
+                                <rect key="frame" x="50" y="109" width="275" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="qJA-Ke-IzJ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Georgia" family="Georgia" pointSize="21"/>
+                                <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Swipe for next recipe" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ybi-I8-bV9">
+                                <rect key="frame" x="50" y="690.66666666666663" width="275" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="SAN-Mg-6B5"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Georgia" family="Georgia" pointSize="19"/>
+                                <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.1285763680934906" green="0.16168665885925293" blue="0.20012417435646057" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="edS-8A-X8r" firstAttribute="trailing" secondItem="1SC-lH-CDf" secondAttribute="trailing" constant="50" id="2zJ-Fr-uBU"/>
+                            <constraint firstItem="Ybi-I8-bV9" firstAttribute="top" secondItem="CjN-6H-y6I" secondAttribute="bottom" constant="20" id="92h-5Q-TWk"/>
+                            <constraint firstItem="Wdn-Gs-vHT" firstAttribute="top" secondItem="edS-8A-X8r" secondAttribute="top" constant="15" id="Dei-oG-ECM"/>
+                            <constraint firstItem="Ufo-H8-jyx" firstAttribute="leading" secondItem="edS-8A-X8r" secondAttribute="leading" constant="50" id="JsT-Ih-CnX"/>
+                            <constraint firstItem="edS-8A-X8r" firstAttribute="trailing" secondItem="CjN-6H-y6I" secondAttribute="trailing" constant="25" id="LWb-XI-8Gg"/>
+                            <constraint firstItem="edS-8A-X8r" firstAttribute="trailing" secondItem="Wdn-Gs-vHT" secondAttribute="trailing" constant="50" id="PgF-06-hhY"/>
+                            <constraint firstItem="Ybi-I8-bV9" firstAttribute="leading" secondItem="edS-8A-X8r" secondAttribute="leading" constant="50" id="QU1-2B-GBb"/>
+                            <constraint firstItem="1SC-lH-CDf" firstAttribute="leading" secondItem="edS-8A-X8r" secondAttribute="leading" constant="50" id="U95-ny-I8b"/>
+                            <constraint firstItem="CjN-6H-y6I" firstAttribute="leading" secondItem="edS-8A-X8r" secondAttribute="leading" constant="25" id="bP5-m6-j8N"/>
+                            <constraint firstItem="CjN-6H-y6I" firstAttribute="height" secondItem="b2V-WW-ssB" secondAttribute="height" multiplier="0.63" id="cB4-EA-bZO"/>
+                            <constraint firstItem="edS-8A-X8r" firstAttribute="trailing" secondItem="Ybi-I8-bV9" secondAttribute="trailing" constant="50" id="g32-nV-OK2"/>
+                            <constraint firstItem="1SC-lH-CDf" firstAttribute="top" secondItem="Ufo-H8-jyx" secondAttribute="bottom" constant="5" id="hbi-YV-cvj"/>
+                            <constraint firstItem="CjN-6H-y6I" firstAttribute="top" secondItem="1SC-lH-CDf" secondAttribute="bottom" constant="20" id="hfc-pL-8Tq"/>
+                            <constraint firstItem="Wdn-Gs-vHT" firstAttribute="leading" secondItem="edS-8A-X8r" secondAttribute="leading" constant="50" id="oXV-SQ-iBI"/>
+                            <constraint firstItem="Ufo-H8-jyx" firstAttribute="top" secondItem="Wdn-Gs-vHT" secondAttribute="bottom" constant="5" id="u6d-T6-t7O"/>
+                            <constraint firstItem="edS-8A-X8r" firstAttribute="trailing" secondItem="Ufo-H8-jyx" secondAttribute="trailing" constant="50" id="wbX-Tj-ZJE"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="edS-8A-X8r"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Recipes" image="recipe.png" id="q5q-E8-bwx" customClass="RAMAnimatedTabBarItem" customModule="RAMAnimatedTabBarController">
@@ -25,6 +85,9 @@
                             <outlet property="animation" destination="foL-HZ-azM" id="Z63-kI-L4H"/>
                         </connections>
                     </tabBarItem>
+                    <connections>
+                        <outlet property="kolodaView" destination="CjN-6H-y6I" id="hcw-7m-3jh"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9AM-uU-pTw" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <customObject id="foL-HZ-azM" customClass="RAMRightRotationAnimation" customModule="RAMAnimatedTabBarController"/>

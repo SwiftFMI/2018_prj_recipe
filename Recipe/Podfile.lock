@@ -67,12 +67,15 @@ PODS:
   - GoogleUtilities/UserDefaults (5.3.6):
     - GoogleUtilities/Logger
   - GTMSessionFetcher/Core (1.2.1)
+  - Koloda (4.6):
+    - pop (~> 1.0)
   - leveldb-library (1.20)
   - nanopb (0.3.901):
     - nanopb/decode (= 0.3.901)
     - nanopb/encode (= 0.3.901)
   - nanopb/decode (0.3.901)
   - nanopb/encode (0.3.901)
+  - pop (1.0.12)
   - RAMAnimatedTabBarController (4.0.1)
 
 DEPENDENCIES:
@@ -80,6 +83,7 @@ DEPENDENCIES:
   - Firebase/Core
   - Firebase/Database
   - Firebase/Storage
+  - Koloda
   - RAMAnimatedTabBarController
 
 SPEC REPOS:
@@ -95,8 +99,10 @@ SPEC REPOS:
     - GoogleAppMeasurement
     - GoogleUtilities
     - GTMSessionFetcher
+    - Koloda
     - leveldb-library
     - nanopb
+    - pop
     - RAMAnimatedTabBarController
 
 SPEC CHECKSUMS:
@@ -111,10 +117,12 @@ SPEC CHECKSUMS:
   GoogleAppMeasurement: 98b71f5e04142793729a5ef23e5b96651ff4b70f
   GoogleUtilities: 95996bea7c7d9b8fb811b7507669a4a8762f80c7
   GTMSessionFetcher: 32aeca0aa144acea523e1c8e053089dec2cb98ca
+  Koloda: bcf5acded25fc49020d1447ed8ddd87e14d01e7e
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
+  pop: d582054913807fd11fd50bfe6a539d91c7e1a55a
   RAMAnimatedTabBarController: 677d6f7ec7e88b1089486f4db49b0a5067e8ad1c
 
-PODFILE CHECKSUM: 863b27f68a223dfb80498ca685e05e0ff4ee47c7
+PODFILE CHECKSUM: c7d81f1469df8e2d49b87f33866bc0fbd2c5ea5f
 
 COCOAPODS: 1.5.3
