@@ -43,6 +43,7 @@
 		A00B471821FFBE9600381BE7 /* Explore.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A00B471721FFBE9600381BE7 /* Explore.storyboard */; };
 		A056E27021FFC8BB0021A7DE /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A056E26F21FFC8BB0021A7DE /* TabBarController.swift */; };
 		A0D26B8A2200DB89008F3B33 /* utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D26B892200DB89008F3B33 /* utils.swift */; };
+		A0FBF9FE22120D8A0068DDD6 /* PopUpDialogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0FBF9FD22120D8A0068DDD6 /* PopUpDialogController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -107,6 +108,7 @@
 		A00B471721FFBE9600381BE7 /* Explore.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Explore.storyboard; sourceTree = "<group>"; };
 		A056E26F21FFC8BB0021A7DE /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		A0D26B892200DB89008F3B33 /* utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = utils.swift; sourceTree = "<group>"; };
+		A0FBF9FD22120D8A0068DDD6 /* PopUpDialogController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpDialogController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -247,6 +249,7 @@
 			children = (
 				A00B470321FFBB3600381BE7 /* ShoppingListController.swift */,
 				A00B471321FFBE7100381BE7 /* ShoppingList.storyboard */,
+				A0FBF9FD22120D8A0068DDD6 /* PopUpDialogController.swift */,
 			);
 			path = ShoppingList;
 			sourceTree = "<group>";
@@ -469,10 +472,14 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Recipe/Pods-Recipe-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Recipe/Pods-Recipe-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Disk/Disk.framework",
+				"${BUILT_PRODUCTS_DIR}/DynamicBlurView/DynamicBlurView.framework",
+				"${BUILT_PRODUCTS_DIR}/EasyPopUp/EasyPopUp.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/RAMAnimatedTabBarController/RAMAnimatedTabBarController.framework",
+				"${BUILT_PRODUCTS_DIR}/SearchTextField/SearchTextField.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
@@ -480,15 +487,19 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Disk.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DynamicBlurView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/EasyPopUp.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RAMAnimatedTabBarController.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SearchTextField.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Recipe/Pods-Recipe-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Recipe/Pods-Recipe-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -504,6 +515,7 @@
 				A00B470221FFBB0400381BE7 /* FavouritesController.swift in Sources */,
 				2330CA5B219C697700E95BE3 /* AppDelegate.swift in Sources */,
 				A00B470621FFBB6D00381BE7 /* CreateRecipeController.swift in Sources */,
+				A0FBF9FE22120D8A0068DDD6 /* PopUpDialogController.swift in Sources */,
 				A00B470821FFBB8500381BE7 /* MoreInfoController.swift in Sources */,
 				A00B470021FFBAC800381BE7 /* ExploreController.swift in Sources */,
 				A00B470421FFBB3600381BE7 /* ShoppingListController.swift in Sources */,

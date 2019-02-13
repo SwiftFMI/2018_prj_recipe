@@ -1,4 +1,8 @@
 PODS:
+  - Disk (0.4.0)
+  - DynamicBlurView (3.0.1)
+  - EasyPopUp (0.1.1):
+    - DynamicBlurView (~> 3.0.1)
   - Firebase/Auth (5.15.0):
     - Firebase/CoreOnly
     - FirebaseAuth (= 5.2.0)
@@ -74,16 +78,23 @@ PODS:
   - nanopb/decode (0.3.901)
   - nanopb/encode (0.3.901)
   - RAMAnimatedTabBarController (4.0.1)
+  - SearchTextField (1.2.2)
 
 DEPENDENCIES:
+  - Disk (~> 0.4.0)
+  - EasyPopUp
   - Firebase/Auth
   - Firebase/Core
   - Firebase/Database
   - Firebase/Storage
   - RAMAnimatedTabBarController
+  - SearchTextField
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - Disk
+    - DynamicBlurView
+    - EasyPopUp
     - Firebase
     - FirebaseAnalytics
     - FirebaseAuth
@@ -98,8 +109,12 @@ SPEC REPOS:
     - leveldb-library
     - nanopb
     - RAMAnimatedTabBarController
+    - SearchTextField
 
 SPEC CHECKSUMS:
+  Disk: ef2956657d5bb56034b38b29b352170165226440
+  DynamicBlurView: b1df5415f9bd31897549e5d7077e5ec120a4d636
+  EasyPopUp: 31282204eca32f4f8e42fb3339b2b490ab4ff496
   Firebase: 8bb9268bff82374f2cbaaabb143e725743c316ae
   FirebaseAnalytics: c06f9d70577d79074214700a71fd5d39de5550fb
   FirebaseAuth: 02e969ff430e156d99d4cb842d77b806b71ad7bb
@@ -114,7 +129,8 @@ SPEC CHECKSUMS:
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   RAMAnimatedTabBarController: 677d6f7ec7e88b1089486f4db49b0a5067e8ad1c
+  SearchTextField: a0992739d4b05dcbb40fb3a5cc6526bd991bdd23
 
-PODFILE CHECKSUM: 863b27f68a223dfb80498ca685e05e0ff4ee47c7
+PODFILE CHECKSUM: fd841a0a85778cb4ec263243ae76a75a31f29965
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.6.0

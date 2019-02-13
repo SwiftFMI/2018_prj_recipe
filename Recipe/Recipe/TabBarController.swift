@@ -18,6 +18,9 @@ class TabBarController: RAMAnimatedTabBarController {
 		let abaoutScene = AboutPageController.instantiate(fromAppStoryboard: .AboutPage);
 		
 		self.viewControllers = [exploreScene,favouritesScene,shoppingListScene,createRecipeScene,abaoutScene];
+		
+		
+		
 	}
 	
 }
