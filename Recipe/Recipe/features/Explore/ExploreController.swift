@@ -19,6 +19,8 @@ class ExploreController: UIViewController {
 	}
 	var mockData: [(name: String, shortDescription: String,image: UIImage, time:  String, cooking: String)] = []
     var fireBaseRecipes: [(recipeID: String, name: String, shortDescription: String,image: UIImage, time:  String, cooking: String)] = []
+    // Array of ShortRecipe, which can be found in RecipeTestClass.swift
+    var shortRecipes: [ShortRecipe] = []
     
     override func loadView() {
         super.loadView()
@@ -41,8 +43,9 @@ class ExploreController: UIViewController {
             
             if index < 4 {
                 let fbr = self.fireBaseRecipes[index]
-                self.mockData[index] = ((name: fbr.name, shortDescription: fbr.shortDescription ,image: fbr.image, time:  fbr.time, cooking: fbr.cooking))
-                    
+                //self.mockData[index] = ((name: fbr.name, shortDescription: fbr.shortDescription ,image: fbr.image, time:  fbr.time, cooking: fbr.cooking))
+                
+                self.shortRecipes[index] = ShortRecipe(name: fbr.name, description: fbr.shortDescription, photo: fbr.image, time: fbr.time, cooking: fbr.cooking)!
                 
             }
             index += 1
@@ -54,12 +57,17 @@ class ExploreController: UIViewController {
         super.viewDidLoad()
         
         
+        /*mockData += [(name: "DefaultRecipe", shortDescription: "RefaultRecipeDescription", image: #imageLiteral(resourceName: "DefaulRecipeImage"),time: "∞",cooking: "∞")]
         mockData += [(name: "DefaultRecipe", shortDescription: "RefaultRecipeDescription", image: #imageLiteral(resourceName: "DefaulRecipeImage"),time: "∞",cooking: "∞")]
         mockData += [(name: "DefaultRecipe", shortDescription: "RefaultRecipeDescription", image: #imageLiteral(resourceName: "DefaulRecipeImage"),time: "∞",cooking: "∞")]
         mockData += [(name: "DefaultRecipe", shortDescription: "RefaultRecipeDescription", image: #imageLiteral(resourceName: "DefaulRecipeImage"),time: "∞",cooking: "∞")]
         mockData += [(name: "DefaultRecipe", shortDescription: "RefaultRecipeDescription", image: #imageLiteral(resourceName: "DefaulRecipeImage"),time: "∞",cooking: "∞")]
-        mockData += [(name: "DefaultRecipe", shortDescription: "RefaultRecipeDescription", image: #imageLiteral(resourceName: "DefaulRecipeImage"),time: "∞",cooking: "∞")]
-        
+        */
+        // new part:
+        let defauiltShortRecipe = ShortRecipe(name: "DefaultRecipe", description: "DefaultRecipeDescription", photo: #imageLiteral(resourceName: "test.jpg"), time: "∞", cooking: "∞")!
+        for _ in 0...4 {
+            shortRecipes.append(defauiltShortRecipe)
+        }
         kolodaView.dataSource = self
         kolodaView.delegate = self
         
@@ -111,11 +119,11 @@ extension ExploreController: KolodaViewDataSource {
         //return UIImageView(image: images[index])
         let swiper: SwipeCardView!
         swiper = SwipeCardView(frame: CGRect(x: 0, y: 0, width: kolodaView.bounds.width, height: kolodaView.bounds.height))
-        let data = mockData[index]
-        
+        //let data = mockData[index]
+        let data = shortRecipes[index]
         swiper.caption = data.name
-        swiper.image = data.image
-        swiper.shorDescription = data.shortDescription
+        swiper.image = data.photo
+        swiper.shorDescription = data.description
         swiper.time = data.time + "'"
         swiper.cooking = data.cooking + "'"
         return swiper
