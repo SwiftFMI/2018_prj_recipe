@@ -17,6 +17,7 @@
                 <outlet property="minutesLabel" destination="35c-3h-UsM" id="71a-uB-N5T"/>
                 <outlet property="recipeImage" destination="fQt-tU-cW2" id="0D4-r6-6AD"/>
                 <outlet property="recipeTitle" destination="Yze-TP-ErQ" id="ao6-Z6-2ua"/>
+                <outlet property="shorDescriptionLabel" destination="oZv-Ir-dAq" id="nBt-3h-G6T"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -71,6 +72,15 @@
                             </constraints>
                             <fontDescription key="fontDescription" name="Georgia" family="Georgia" pointSize="17"/>
                             <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oZv-Ir-dAq">
+                            <rect key="frame" x="20" y="472" width="335" height="120"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="120" id="UWa-5f-Lf8"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="Georgia" family="Georgia" pointSize="30"/>
+                            <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
