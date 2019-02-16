@@ -25,6 +25,7 @@ class SwipeCardView: UIView {
     
     @IBOutlet weak var minutesLabel: UILabel!
     
+    @IBOutlet weak var shorDescriptionLabel: UILabel!
     @IBOutlet weak var cookingLabel: UILabel!
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -46,6 +47,11 @@ class SwipeCardView: UIView {
     var caption: String? {
         get { return recipeTitle?.text }
         set { recipeTitle.text = newValue }
+    }
+    
+    var shorDescription: String? {
+        get { return shorDescriptionLabel?.text }
+        set { shorDescriptionLabel.text = newValue }
     }
     
     var image: UIImage? {

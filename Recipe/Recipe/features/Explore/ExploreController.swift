@@ -5,7 +5,7 @@
 //  Created by Atanas Kurtakov on 29.01.19.
 //  Copyright © 2019 Mihail Kirilov. All rights reserved.
 //
-
+import Firebase
 import Foundation;
 import UIKit;
 import Koloda;
@@ -14,16 +14,48 @@ class ExploreController: UIViewController {
     
     @IBOutlet weak var kolodaView: KolodaView!
     
-    var mockData: [(name: String, image: UIImage, time:  String, cooking: String)] = []
+    var mockData: [(name: String, shortDescription: String,image: UIImage, time:  String, cooking: String)] = []
+    var fireBaseRecipes: [(recipeID: String, name: String, shortDescription: String,image: UIImage, time:  String, cooking: String)] = []
+    
+    override func loadView() {
+        super.loadView()
+        FirebaseApp.configure()
+        
+        var ref: DatabaseReference!
+        ref = Database.database().reference(withPath: "/")
+        
+        var index = 0;
+        ref.child("short-recipes").observe(.childAdded) { (snapshot) in
+            let name = snapshot.childSnapshot(forPath: "name").value as! String
+            let shortIngredientList = snapshot.childSnapshot(forPath: "shortIngredientList").value as! String
+            let shortDescription = snapshot.childSnapshot(forPath: "shortDescription").value as! String + " [" + shortIngredientList + "]"
+            
+            let minutesToCook = snapshot.childSnapshot(forPath: "minutesToCook").value
+            let minutesToPrepare = snapshot.childSnapshot(forPath: "minutesToPrepare").value
+            let recipeID = snapshot.key
+            
+            self.fireBaseRecipes += [(recipeID: recipeID, name: name, shortDescription: shortDescription, image: #imageLiteral(resourceName: "test.jpg"), time: "\(minutesToPrepare ?? 0)", cooking: "\(minutesToCook ?? 0)")]
+            
+            if index < 4 {
+                let fbr = self.fireBaseRecipes[index]
+                self.mockData[index] = ((name: fbr.name, shortDescription: fbr.shortDescription ,image: fbr.image, time:  fbr.time, cooking: fbr.cooking))
+                    
+                
+            }
+            index += 1
+            self.kolodaView.reloadData()
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        mockData += [(name: "Soup",image: #imageLiteral(resourceName: "test.jpg"),time: "20",cooking: "30")]
-        mockData += [(name: "Cornflake",image: #imageLiteral(resourceName: "test2.jpg"),time: "40",cooking: "60")]
-        mockData += [(name: "Pasta and noodles",image: #imageLiteral(resourceName: "test3.png"),time: "80",cooking: "35")]
-        mockData += [(name: "Veggie Enchiladas",image: #imageLiteral(resourceName: "test4.jpg"),time: "50",cooking: "55")]
-        mockData += [(name: "Salad",image: #imageLiteral(resourceName: "test5.jpg"),time: "30",cooking: "50")]
+        
+        mockData += [(name: "DefaultRecipe", shortDescription: "RefaultRecipeDescription", image: #imageLiteral(resourceName: "DefaulRecipeImage"),time: "∞",cooking: "∞")]
+        mockData += [(name: "DefaultRecipe", shortDescription: "RefaultRecipeDescription", image: #imageLiteral(resourceName: "DefaulRecipeImage"),time: "∞",cooking: "∞")]
+        mockData += [(name: "DefaultRecipe", shortDescription: "RefaultRecipeDescription", image: #imageLiteral(resourceName: "DefaulRecipeImage"),time: "∞",cooking: "∞")]
+        mockData += [(name: "DefaultRecipe", shortDescription: "RefaultRecipeDescription", image: #imageLiteral(resourceName: "DefaulRecipeImage"),time: "∞",cooking: "∞")]
+        mockData += [(name: "DefaultRecipe", shortDescription: "RefaultRecipeDescription", image: #imageLiteral(resourceName: "DefaulRecipeImage"),time: "∞",cooking: "∞")]
         
         kolodaView.dataSource = self
         kolodaView.delegate = self
@@ -47,30 +79,22 @@ class ExploreController: UIViewController {
 
 extension ExploreController: KolodaViewDelegate {
     func kolodaDidRunOutOfCards(_ koloda: KolodaView) {
-        print("OK")
-        kolodaView.reloadData()
-        
-        /*let position = kolodaView.currentCardIndex
-        for i in 0...4 {
-            mockData.append(mockData[i])
-        }
 
-        kolodaView.insertCardAtIndexRange(position..<position + 5, animated: true)
-        Add more cards...
-        */
+        kolodaView.resetCurrentCardIndex()
+        kolodaView.reloadData()
     }
     
     func koloda(_ koloda: KolodaView, didSelectCardAt index: Int) {
         // When clicked on the recipe, needs to go to screen for it.
         performSegue(withIdentifier: "fullRecipe", sender: nil)
-        //prepare(for: , sender: <#T##Any?#>)
-        
+        //prepare(for: , sender: <#T##Any?#>        
     }
 }
 
 extension ExploreController: KolodaViewDataSource {
     func kolodaNumberOfCards(_ koloda: KolodaView) -> Int {
         return 5
+        
     }
     
     func kolodaSpeedThatCardShouldDrag(_ koloda: KolodaView) -> DragSpeed {
@@ -85,6 +109,7 @@ extension ExploreController: KolodaViewDataSource {
         
         swiper.caption = data.name
         swiper.image = data.image
+        swiper.shorDescription = data.shortDescription
         swiper.time = data.time + "'"
         swiper.cooking = data.cooking + "'"
         return swiper
