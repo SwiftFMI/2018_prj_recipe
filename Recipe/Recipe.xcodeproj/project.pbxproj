@@ -53,7 +53,7 @@
 		A00B471821FFBE9600381BE7 /* Explore.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A00B471721FFBE9600381BE7 /* Explore.storyboard */; };
 		A056E27021FFC8BB0021A7DE /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A056E26F21FFC8BB0021A7DE /* TabBarController.swift */; };
 		A08EDFAF2218456F00D3ED3B /* PopUpDialogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0FBF9FD22120D8A0068DDD6 /* PopUpDialogController.swift */; };
-		A08EDFB2221882DA00D3ED3B /* RecipeOverview.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A08EDFB1221882DA00D3ED3B /* RecipeOverview.storyboard */; };
+		A08EDFB2221882DA00D3ED3B /* RecipeOverviewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A08EDFB1221882DA00D3ED3B /* RecipeOverviewController.storyboard */; };
 		A08EDFB4221882F300D3ED3B /* RecipeOverview.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08EDFB3221882F300D3ED3B /* RecipeOverview.swift */; };
 		A0D26B8A2200DB89008F3B33 /* utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D26B892200DB89008F3B33 /* utils.swift */; };
 /* End PBXBuildFile section */
@@ -129,7 +129,7 @@
 		A00B471521FFBE8400381BE7 /* Favourites.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Favourites.storyboard; sourceTree = "<group>"; };
 		A00B471721FFBE9600381BE7 /* Explore.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Explore.storyboard; sourceTree = "<group>"; };
 		A056E26F21FFC8BB0021A7DE /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
-		A08EDFB1221882DA00D3ED3B /* RecipeOverview.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = RecipeOverview.storyboard; sourceTree = "<group>"; };
+		A08EDFB1221882DA00D3ED3B /* RecipeOverviewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = RecipeOverviewController.storyboard; sourceTree = "<group>"; };
 		A08EDFB3221882F300D3ED3B /* RecipeOverview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeOverview.swift; sourceTree = "<group>"; };
 		A0D26B892200DB89008F3B33 /* utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = utils.swift; sourceTree = "<group>"; };
 		A0FBF9FD22120D8A0068DDD6 /* PopUpDialogController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpDialogController.swift; sourceTree = "<group>"; };
@@ -330,7 +330,7 @@
 		A08EDFB02218829500D3ED3B /* RecipeOverview */ = {
 			isa = PBXGroup;
 			children = (
-				A08EDFB1221882DA00D3ED3B /* RecipeOverview.storyboard */,
+				A08EDFB1221882DA00D3ED3B /* RecipeOverviewController.storyboard */,
 				A08EDFB3221882F300D3ED3B /* RecipeOverview.swift */,
 			);
 			path = RecipeOverview;
@@ -455,7 +455,7 @@
 				2F15EDB022139691007020E0 /* test4.jpg in Resources */,
 				2330CA65219C697A00E95BE3 /* LaunchScreen.storyboard in Resources */,
 				2F0BCFB421FF78900001AFC7 /* recipe.png in Resources */,
-				A08EDFB2221882DA00D3ED3B /* RecipeOverview.storyboard in Resources */,
+				A08EDFB2221882DA00D3ED3B /* RecipeOverviewController.storyboard in Resources */,
 				2F1689CF221347C500DCDFCE /* test.jpg in Resources */,
 				2F0BCFB521FF78900001AFC7 /* recipe@2x.png in Resources */,
 				A00B471621FFBE8400381BE7 /* Favourites.storyboard in Resources */,
