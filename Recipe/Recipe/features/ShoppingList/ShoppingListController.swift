@@ -10,6 +10,7 @@ import Foundation;
 import UIKit;
 import Disk;
 import EasyPopUp;
+import SearchTextField;
 
 class ShoppingListController: UIViewController,UITableViewDelegate,UITableViewDataSource {
 	
@@ -67,15 +68,40 @@ class ShoppingListController: UIViewController,UITableViewDelegate,UITableViewDa
 	
 	@IBAction func addButtonHandler(_ sender: UIButton) {
 		var config = EasyPopupConfig();
+		var easePopUp:EasyViewControllerPopup? = nil;
 		config.animationType = .scale;
 		config.cornerRadius = CGFloat(20);
 		config.blurBackground = true;
 		config.blurRadius = CGFloat(10);
 		let popupVC = self.storyboard?.instantiateViewController(withIdentifier: "popupDialog") as! PopupDialogController;
-		let easePopUp = EasyViewControllerPopup(sourceViewController: self, destinationViewController: popupVC,config:config);
+		popupVC.products = self.tableData;
 		
-		easePopUp.showVCAsPopup();
+		popupVC.add = { (item:ShoppingListData) in
+			var location = -1;
+			for (index, value) in self.tableData.enumerated(){
+				if value.title == item.title{
+					location = index;
+					break;
+				}
+			}
+			if location != -1 {
+				let tableCell = self.table.cellForRow(at: IndexPath(row: location, section: 0)) as! ShoppingListTableRow;
+				tableCell.itemCount?.text = String(Int((tableCell.itemCount?.text)!)! + item.itemCount);
+			} else {
+				self.tableData.append(item);
+				self.table.beginUpdates();
+				self.table.insertRows(at: [IndexPath(row: self.tableData.count-1, section: 0)], with: .automatic);
+				self.table.endUpdates();
+			}
+		}
+		popupVC.cancel = { () in
+			//
+		}
+		easePopUp = EasyViewControllerPopup(sourceViewController: self, destinationViewController: popupVC,config:config);
+		
+		easePopUp!.showVCAsPopup();
 	}
+	
 	public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return tableData.count;
 	}
@@ -87,6 +113,7 @@ class ShoppingListController: UIViewController,UITableViewDelegate,UITableViewDa
 		
 		return cell;
 	}
+	
 	@objc func swipeToRemoveHandler(_ sender: UISwipeGestureRecognizer) {
 		if sender.state == UIGestureRecognizer.State.ended {
 			let location = sender.location(in: self.table)
@@ -112,7 +139,7 @@ class ShoppingListTableRow: UITableViewCell {
 	@IBOutlet weak var units: UILabel!
 	
 	func initInternal(rowData data:ShoppingListData) -> Void {
-		self.itemName?.text = data.itemName;
+		self.itemName?.text = data.title;
 		self.itemCount?.text = "\(data.itemCount)";
 		self.imageView?.image = data.image;
 		self.units?.text = data.units;
@@ -124,6 +151,9 @@ class ShoppingListTableRow: UITableViewCell {
 	
 	@IBAction func removeQuantity(_ sender: UIButton) {
 		self.itemCount.text = "\(Int(self.itemCount.text!)! - findDelta())";
+		if self.itemCount.text == "0" {
+			sender.isEnabled = false;
+		}
 	}
 	
 	func findDelta()->Int{
@@ -141,32 +171,41 @@ class ShoppingListTableRow: UITableViewCell {
 	
 	override func layoutSubviews() {
 		super.layoutSubviews()
-		
-//		contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0))
 	}
 }
 
-struct ShoppingListData {
-	let image:UIImage?;
-	private let imageName:String;
-	let itemName:String;
-	let itemCount:Int;
-	let units:String;
+final class ShoppingListData:SearchTextFieldItem,Decodable {
+//	let image:UIImage?;
+	private var imageName:String;
+//	let itemName:String;
+	var itemCount:Int;
+	var units:String ;
 	
 	enum CodingKeys: String, CodingKey
 	{
-		case itemName
+		case title
 		case itemCount
 		case units
 		case imageName
 	}
 	
 	init(name itemName:String,count itemCount: Int,units:String,imagePath imageName:String) {
-		self.itemName = itemName;
+		let img = UIImage(named: imageName);
 		self.itemCount = itemCount;
 		self.units = units;
 		self.imageName = imageName;
-		self.image = UIImage(named: imageName);
+		super.init(title: itemName,subtitle: "",image: img);
+	}
+	
+	init(from decoder: Decoder) throws
+	{
+		let values = try decoder.container(keyedBy: CodingKeys.self);
+		let title = try values.decode(String.self, forKey: .title);
+		self.imageName = try values.decode(String.self, forKey: .imageName);
+		let image = UIImage(named: self.imageName);
+		self.itemCount = try values.decode(Int.self, forKey: .itemCount)
+		self.units = try values.decode(String.self, forKey: .units);
+		super.init(title:title,subtitle:"",image:image);
 	}
 }
 
@@ -175,22 +214,22 @@ extension ShoppingListData: Encodable
 	func encode(to encoder: Encoder) throws
 	{
 		var container = encoder.container(keyedBy: CodingKeys.self)
-		try container.encode(itemName, forKey: .itemName);
+		try container.encode(title, forKey: .title);
 		try container.encode(itemCount, forKey: .itemCount);
 		try container.encode(units, forKey: .units);
 		try container.encode(imageName, forKey: .imageName);
 	}
 }
 
-extension ShoppingListData: Decodable
-{
-	init(from decoder: Decoder) throws
-	{
-		let values = try decoder.container(keyedBy: CodingKeys.self);
-		self.itemName = try values.decode(String.self, forKey: .itemName);
-		self.itemCount = try values.decode(Int.self, forKey: .itemCount);
-		self.units = try values.decode(String.self, forKey: .units);
-		self.imageName = try values.decode(String.self, forKey: .imageName);
-		self.image = UIImage(named: self.imageName);
-	}
-}
+//extension ShoppingListData: Decodable
+//{
+//	init(from decoder: Decoder) throws
+//	{
+//		let values = try decoder.container(keyedBy: CodingKeys.self);
+//		self.title = try values.decode(String.self, forKey: .title);
+//		self.itemCount = try values.decode(Int.self, forKey: .itemCount);
+//		self.units = try values.decode(String.self, forKey: .units);
+//		self.imageName = try values.decode(String.self, forKey: .imageName);
+//		self.image = UIImage(named: self.imageName);
+//	}
+//}

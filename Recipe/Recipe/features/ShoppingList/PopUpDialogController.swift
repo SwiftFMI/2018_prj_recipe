@@ -11,30 +11,46 @@ import UIKit;
 import EasyPopUp;
 import SearchTextField;
 
-class PopupDialogController: UIViewController {
+class PopupDialogController: UIViewController,UIGestureRecognizerDelegate {
+	@IBOutlet weak var itemQuantity: UITextField!
 	@IBOutlet var contentView: UIView!;
 	@IBOutlet weak var searchInput: SearchTextField!
 	
-	override func viewWillAppear(_ animated: Bool) {
+	var selectedItem:ShoppingListData?=nil;
+	var products:Array<SearchTextFieldItem> = []; // сложи всички продукти от firebase тук
+	var add:(_ item:ShoppingListData)->Void = { (item) in return };
+	var cancel: ()->Void = { () in return };
+	
+	@IBAction func cancelHandler(_ sender: Any) {
+		self.cancel();
+		self.dismiss(animated: true, completion: nil);
 	}
 	
-	override func viewDidAppear(_ animated: Bool) {
-		let item1 = SearchTextFieldItem(title: "Blue", subtitle: nil, image: UIImage(named: "Apple"))
-		let item2 = SearchTextFieldItem(title: "Red", subtitle: nil, image: UIImage(named: "Apple"))
-		let item3 = SearchTextFieldItem(title: "Yellow", subtitle: nil, image: UIImage(named: "Apple"))
-		searchInput.placeholder = "Search for ingredient";
+	@IBAction func addHandler(_ sender: UIButton) {
+		let itemQuantity:Int = self.itemQuantity.text != nil && self.itemQuantity.text != "" ? Int(self.itemQuantity.text!)! : 0;
+		self.selectedItem?.itemCount = itemQuantity
+		if self.selectedItem != nil {
+			self.add(self.selectedItem!);
+		}
+		self.dismiss(animated: true, completion: nil);
 		
-		searchInput.filterItems([item1, item2, item3])
+	}
+	@IBAction func tapAction(_ sender: Any) {
+		searchInput.endEditing(true);
+		itemQuantity.endEditing(true);
+	}
+	override func viewDidAppear(_ animated: Bool) {
+		searchInput.becomeFirstResponder();
+		searchInput.filterItems(products);
+		searchInput.itemSelectionHandler = { item, itemPosition in
+			self.selectedItem =  item[0] as? ShoppingListData;
+			self.searchInput.text = self.selectedItem?.title;
+		}
 	}
 	
+	@IBOutlet weak var addToListHandler: UIView!
 	override func viewDidLoad() {
 		super.viewDidLoad();
-		contentView.frame.size.height = self.view.frame.size.height * 0.8;
-		contentView.frame.size.width = self.view.frame.size.width * 0.8;
-		
-		searchInput.frame.size.height = 40;
-		searchInput.frame.size.width = contentView.frame.size.width * 0.8;
-		
 	}
 }
 
