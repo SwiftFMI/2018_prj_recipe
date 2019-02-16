@@ -11,25 +11,30 @@ import UIKit
 
 class ShortRecipe {
     var mockData: [(name: String, shortDescription: String,image: UIImage, time:  String, cooking: String)] = []
+    var id: String
     var name: String
     var description: String
     var photo: UIImage?
-    var time: String
-    var cooking: String
+    var timeToPrepare: String
+    var timeToCook: String
+    var author: String?
+    var longDescription: String?
+    var ingredients: String?
     
-    init?(name: String, description: String, photo: UIImage?, time: String, cooking:String) {
+    init?(name: String, description: String, photo: UIImage?, timeToPrepare: String = "∞", timeToCook: String = "∞", recipeID: String = "-1") {
         
         // Initialization should fail in this case:
-        if name.isEmpty || description.isEmpty || time.isEmpty || cooking.isEmpty {
+        if name.isEmpty || description.isEmpty || timeToCook.isEmpty || timeToPrepare.isEmpty {
             return nil
         }
         
         // Initialize stored properties
+        self.id = recipeID
         self.name = name
         self.description = description
         self.photo = photo
-        self.time = time
-        self.cooking = cooking
+        self.timeToPrepare = timeToPrepare
+        self.timeToCook = timeToCook
     }
     
 }

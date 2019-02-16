@@ -59,12 +59,12 @@ class SwipeCardView: UIView {
         set { recipeImage.image = newValue }
     }
     
-    var time: String? {
+    var timeToPrepare: String? {
         get { return minutesLabel?.text }
         set { minutesLabel.text = newValue }
     }
     
-    var cooking: String? {
+    var timeToCook: String? {
         get { return cookingLabel?.text }
         set { cookingLabel?.text = newValue }
     }

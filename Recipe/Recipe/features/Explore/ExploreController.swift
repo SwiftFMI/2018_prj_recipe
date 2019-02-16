@@ -17,8 +17,7 @@ class ExploreController: UIViewController {
 	@IBAction func openRecipeHandler(_ sender: UITapGestureRecognizer) {
 		print("asd");
 	}
-	var mockData: [(name: String, shortDescription: String,image: UIImage, time:  String, cooking: String)] = []
-    var fireBaseRecipes: [(recipeID: String, name: String, shortDescription: String,image: UIImage, time:  String, cooking: String)] = []
+
     // Array of ShortRecipe, which can be found in RecipeTestClass.swift
     var shortRecipes: [ShortRecipe] = []
     
@@ -35,18 +34,14 @@ class ExploreController: UIViewController {
             let shortIngredientList = snapshot.childSnapshot(forPath: "shortIngredientList").value as! String
             let shortDescription = snapshot.childSnapshot(forPath: "shortDescription").value as! String + " [" + shortIngredientList + "]"
             
-            let minutesToCook = snapshot.childSnapshot(forPath: "minutesToCook").value
-            let minutesToPrepare = snapshot.childSnapshot(forPath: "minutesToPrepare").value
+            let minutesToCook = snapshot.childSnapshot(forPath: "minutesToCook").value ?? ""
+            let minutesToPrepare = snapshot.childSnapshot(forPath: "minutesToPrepare").value ?? ""
             let recipeID = snapshot.key
             
-            self.fireBaseRecipes += [(recipeID: recipeID, name: name, shortDescription: shortDescription, image: #imageLiteral(resourceName: "test.jpg"), time: "\(minutesToPrepare ?? 0)", cooking: "\(minutesToCook ?? 0)")]
+            let sr = ShortRecipe(name: name, description: shortDescription, photo: #imageLiteral(resourceName: "test.jpg"), timeToPrepare: "\(minutesToPrepare)" , timeToCook: "\(minutesToCook)", recipeID: recipeID)!
             
             if index < 4 {
-                let fbr = self.fireBaseRecipes[index]
-                //self.mockData[index] = ((name: fbr.name, shortDescription: fbr.shortDescription ,image: fbr.image, time:  fbr.time, cooking: fbr.cooking))
-                
-                self.shortRecipes[index] = ShortRecipe(name: fbr.name, description: fbr.shortDescription, photo: fbr.image, time: fbr.time, cooking: fbr.cooking)!
-                
+                self.shortRecipes[index] = sr
             }
             index += 1
             self.kolodaView.reloadData()
@@ -56,15 +51,8 @@ class ExploreController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        /*mockData += [(name: "DefaultRecipe", shortDescription: "RefaultRecipeDescription", image: #imageLiteral(resourceName: "DefaulRecipeImage"),time: "∞",cooking: "∞")]
-        mockData += [(name: "DefaultRecipe", shortDescription: "RefaultRecipeDescription", image: #imageLiteral(resourceName: "DefaulRecipeImage"),time: "∞",cooking: "∞")]
-        mockData += [(name: "DefaultRecipe", shortDescription: "RefaultRecipeDescription", image: #imageLiteral(resourceName: "DefaulRecipeImage"),time: "∞",cooking: "∞")]
-        mockData += [(name: "DefaultRecipe", shortDescription: "RefaultRecipeDescription", image: #imageLiteral(resourceName: "DefaulRecipeImage"),time: "∞",cooking: "∞")]
-        mockData += [(name: "DefaultRecipe", shortDescription: "RefaultRecipeDescription", image: #imageLiteral(resourceName: "DefaulRecipeImage"),time: "∞",cooking: "∞")]
-        */
         // new part:
-        let defauiltShortRecipe = ShortRecipe(name: "DefaultRecipe", description: "DefaultRecipeDescription", photo: #imageLiteral(resourceName: "test.jpg"), time: "∞", cooking: "∞")!
+        let defauiltShortRecipe = ShortRecipe(name: "DefaultRecipe", description: "DefaultRecipeDescription", photo: #imageLiteral(resourceName: "DefaulRecipeImage"))!
         for _ in 0...4 {
             shortRecipes.append(defauiltShortRecipe)
         }
@@ -98,8 +86,29 @@ extension ExploreController: KolodaViewDelegate {
     
     func koloda(_ koloda: KolodaView, didSelectCardAt index: Int) {
         // When clicked on the recipe, needs to go to screen for it.
-		let recipeOverviewController = RecipeOverviewController.instantiate(fromAppStoryboard: .RecipeOverviewController);
-		self.present(recipeOverviewController, animated: true, completion: nil);
+//        let currentRecipe = shortRecipes[index]
+        var ref: DatabaseReference!
+        ref = Database.database().reference(withPath: "/")
+        let currentRecipe = shortRecipes[index]
+        ref.child("recipes/\(currentRecipe.id)").observe(.value) { (snapshot) in
+            currentRecipe.author = snapshot.childSnapshot(forPath: "author").value as? String
+            currentRecipe.longDescription = snapshot.childSnapshot(forPath: "longDescription").value as? String
+//            currentRecipe.ingredients =  as? String
+            let ingredients = snapshot.childSnapshot(forPath: "ingredients").value as! NSDictionary
+            var array = [String]()
+            for (ingredient, amount) in ingredients {
+                array += ["\(ingredient) \(amount)"]
+            }
+            
+            currentRecipe.ingredients = array.joined(separator:" ")
+            
+//            a.
+            let recipeOverviewController = RecipeOverviewController.instantiate(fromAppStoryboard: .RecipeOverviewController);
+//            recipeOverviewController.currentRecipe = p shortRecipes[index]
+            self.present(recipeOverviewController, animated: true, completion: nil);
+        }
+        
+        
 //        performSegue(withIdentifier: "fullRecipe", sender: nil)
         //prepare(for: , sender: <#T##Any?#>
     }
@@ -119,13 +128,13 @@ extension ExploreController: KolodaViewDataSource {
         //return UIImageView(image: images[index])
         let swiper: SwipeCardView!
         swiper = SwipeCardView(frame: CGRect(x: 0, y: 0, width: kolodaView.bounds.width, height: kolodaView.bounds.height))
-        //let data = mockData[index]
+
         let data = shortRecipes[index]
         swiper.caption = data.name
         swiper.image = data.photo
         swiper.shorDescription = data.description
-        swiper.time = data.time + "'"
-        swiper.cooking = data.cooking + "'"
+        swiper.timeToPrepare = data.timeToPrepare
+        swiper.timeToCook = data.timeToCook
         return swiper
         //return UIImageView(image: #imageLiteral(resourceName: "info.png"))
     }
