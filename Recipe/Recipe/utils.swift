@@ -11,7 +11,7 @@ import UIKit;
 
 enum AppStoryboard : String {
 	
-	case Main,Explore,Favourites,ShoppingList,CreateRecipe,AboutPage;
+	case Main,Explore,Favourites,ShoppingList,CreateRecipe,AboutPage,RecipeOverviewController;
 	
 	var instance : UIStoryboard {
 		

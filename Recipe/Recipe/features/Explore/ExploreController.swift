@@ -14,7 +14,10 @@ class ExploreController: UIViewController {
     
     @IBOutlet weak var kolodaView: KolodaView!
     
-    var mockData: [(name: String, shortDescription: String,image: UIImage, time:  String, cooking: String)] = []
+	@IBAction func openRecipeHandler(_ sender: UITapGestureRecognizer) {
+		print("asd");
+	}
+	var mockData: [(name: String, shortDescription: String,image: UIImage, time:  String, cooking: String)] = []
     var fireBaseRecipes: [(recipeID: String, name: String, shortDescription: String,image: UIImage, time:  String, cooking: String)] = []
     
     override func loadView() {
@@ -64,17 +67,18 @@ class ExploreController: UIViewController {
         kolodaView.layer.masksToBounds = true
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "fullRecipe" {
-            print("Hello")
-            //let navigationController = segue.destination as! UINavigationController
-            //let targetController = navigationController.topViewController as? FullRecipeViewController
-            if let nextViewController = segue.destination as? FullRecipeViewController {
-                nextViewController.name = self.mockData[self.kolodaView.currentCardIndex].name
-            }
-            //targetController?.image?.image = self.mockData[self.kolodaView.currentCardIndex].image
-        }
-    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == "fullRecipe" {
+//			print("Hello");
+//            //let navigationController = segue.destination as! UINavigationController
+//            //let targetController = navigationController.topViewController as? FullRecipeViewController
+//            if let nextViewController = segue.destination as? RecipeOverview {
+//				let recipeScene = RecipeOverview.instantiate(fromAppStoryboard: .RecipeOverview);
+////                nextViewController.name = self.mockData[self.kolodaView.currentCardIndex].name
+//            }
+//            //targetController?.image?.image = self.mockData[self.kolodaView.currentCardIndex].image
+//        }
+//    }
 }
 
 extension ExploreController: KolodaViewDelegate {
@@ -86,8 +90,10 @@ extension ExploreController: KolodaViewDelegate {
     
     func koloda(_ koloda: KolodaView, didSelectCardAt index: Int) {
         // When clicked on the recipe, needs to go to screen for it.
-        performSegue(withIdentifier: "fullRecipe", sender: nil)
-        //prepare(for: , sender: <#T##Any?#>        
+		let recipeOverviewController = RecipeOverviewController.instantiate(fromAppStoryboard: .RecipeOverviewController);
+		self.present(recipeOverviewController, animated: true, completion: nil);
+//        performSegue(withIdentifier: "fullRecipe", sender: nil)
+        //prepare(for: , sender: <#T##Any?#>
     }
 }
 

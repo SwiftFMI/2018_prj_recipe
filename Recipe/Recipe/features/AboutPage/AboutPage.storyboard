@@ -27,7 +27,7 @@
                     </tabBarItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="J4T-hF-zjU" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <customObject id="cNu-Se-Yfm" customClass="RAMRightRotationAnimation" customModule="RAMAnimatedTabBarController"/>
+                <customObject id="cNu-Se-Yfm" customClass="RAMBounceAnimation" customModule="RAMAnimatedTabBarController"/>
             </objects>
             <point key="canvasLocation" x="3665" y="-522"/>
         </scene>
