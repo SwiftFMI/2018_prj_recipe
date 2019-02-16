@@ -14,6 +14,7 @@
 		2330CA65219C697A00E95BE3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2330CA63219C697A00E95BE3 /* LaunchScreen.storyboard */; };
 		2330CA70219C697A00E95BE3 /* RecipeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2330CA6F219C697A00E95BE3 /* RecipeTests.swift */; };
 		2330CA7B219C697A00E95BE3 /* RecipeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2330CA7A219C697A00E95BE3 /* RecipeUITests.swift */; };
+		239CCA902218A5FA00BF7941 /* RecipeTestClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239CCA8F2218A5FA00BF7941 /* RecipeTestClass.swift */; };
 		23F70A0221DE919000DDF026 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 23F70A0121DE919000DDF026 /* GoogleService-Info.plist */; };
 		2F05250621FF97C10043BD50 /* favourite.png in Resources */ = {isa = PBXBuildFile; fileRef = 2F05250321FF97BD0043BD50 /* favourite.png */; };
 		2F05250721FF97C10043BD50 /* favourite@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2F05250421FF97C00043BD50 /* favourite@3x.png */; };
@@ -90,6 +91,7 @@
 		2330CA76219C697A00E95BE3 /* RecipeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RecipeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2330CA7A219C697A00E95BE3 /* RecipeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeUITests.swift; sourceTree = "<group>"; };
 		2330CA7C219C697A00E95BE3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		239CCA8F2218A5FA00BF7941 /* RecipeTestClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeTestClass.swift; sourceTree = "<group>"; };
 		23F70A0121DE919000DDF026 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2F05250321FF97BD0043BD50 /* favourite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = favourite.png; sourceTree = "<group>"; };
 		2F05250421FF97C00043BD50 /* favourite@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "favourite@3x.png"; sourceTree = "<group>"; };
@@ -193,6 +195,7 @@
 				2330CA5C219C697700E95BE3 /* ViewController.swift */,
 				2330CA5E219C697700E95BE3 /* Main.storyboard */,
 				2330CA61219C697A00E95BE3 /* Assets.xcassets */,
+				239CCA8F2218A5FA00BF7941 /* RecipeTestClass.swift */,
 				2330CA63219C697A00E95BE3 /* LaunchScreen.storyboard */,
 				2330CA66219C697A00E95BE3 /* Info.plist */,
 				A056E26F21FFC8BB0021A7DE /* TabBarController.swift */,
@@ -574,6 +577,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				239CCA902218A5FA00BF7941 /* RecipeTestClass.swift in Sources */,
 				A0D26B8A2200DB89008F3B33 /* utils.swift in Sources */,
 				2330CA5D219C697700E95BE3 /* ViewController.swift in Sources */,
 				A056E27021FFC8BB0021A7DE /* TabBarController.swift in Sources */,
