@@ -82,11 +82,28 @@
                                     </label>
                                 </subviews>
                             </stackView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ojs-kM-aQw">
+                                <rect key="frame" x="16" y="131" width="343" height="617"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Loading..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V1j-Ra-ehq">
+                                        <rect key="frame" x="113.33333333333333" y="287.66666666666669" width="148.66666666666669" height="42"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="35"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="0.79995184075342463" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.58379335669999999" blue="0.1897892541" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="edS-8A-X8r" firstAttribute="bottom" secondItem="BBl-NR-O1b" secondAttribute="bottom" id="CXd-I4-gom"/>
                             <constraint firstItem="BBl-NR-O1b" firstAttribute="leading" secondItem="edS-8A-X8r" secondAttribute="leading" id="QKM-SN-4os"/>
+                            <constraint firstItem="ojs-kM-aQw" firstAttribute="top" secondItem="edS-8A-X8r" secondAttribute="top" constant="87" id="WXJ-sb-36Z"/>
+                            <constraint firstItem="edS-8A-X8r" firstAttribute="bottom" secondItem="ojs-kM-aQw" secondAttribute="bottom" constant="30" id="agb-h9-IsF"/>
+                            <constraint firstItem="ojs-kM-aQw" firstAttribute="leading" secondItem="edS-8A-X8r" secondAttribute="leading" constant="16" id="bno-FW-pip"/>
+                            <constraint firstItem="edS-8A-X8r" firstAttribute="trailing" secondItem="ojs-kM-aQw" secondAttribute="trailing" constant="16" id="jrl-hH-8D3"/>
                             <constraint firstItem="edS-8A-X8r" firstAttribute="trailing" secondItem="BBl-NR-O1b" secondAttribute="trailing" id="op9-iT-7dn"/>
                             <constraint firstItem="BBl-NR-O1b" firstAttribute="top" secondItem="edS-8A-X8r" secondAttribute="top" id="svl-j8-SKj"/>
                         </constraints>
@@ -100,39 +117,13 @@
                     <navigationItem key="navigationItem" id="Owb-fA-V9W"/>
                     <connections>
                         <outlet property="kolodaView" destination="CjN-6H-y6I" id="hcw-7m-3jh"/>
+                        <outlet property="loadingView" destination="ojs-kM-aQw" id="i9E-II-uUi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9AM-uU-pTw" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <customObject id="foL-HZ-azM" customClass="RAMBounceAnimation" customModule="RAMAnimatedTabBarController"/>
             </objects>
-            <point key="canvasLocation" x="460" y="-522"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="Wru-xG-2bb">
-            <objects>
-                <viewController id="f92-G2-6lQ" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Bdg-al-Ggy">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fIr-pI-XDd">
-                                <rect key="frame" x="86" y="310" width="150" height="58"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="sBV-tv-fup"/>
-                    </view>
-                    <connections>
-                        <outlet property="recipeName" destination="fIr-pI-XDd" id="v38-x2-NIZ"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="JF0-al-krh" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1485.5999999999999" y="-522.41379310344826"/>
+            <point key="canvasLocation" x="460" y="-522.41379310344826"/>
         </scene>
     </scenes>
     <resources>

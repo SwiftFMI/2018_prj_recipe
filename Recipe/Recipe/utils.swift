@@ -26,7 +26,6 @@ enum AppStoryboard : String {
 			
 			fatalError("ViewController with identifier \(storyboardID), not found in \(self.rawValue) Storyboard.\nFile : \(file) \nLine Number : \(line) \nFunction : \(function)")
 		}
-		
 		return scene
 	}
 	

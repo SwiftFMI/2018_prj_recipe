@@ -21,5 +21,7 @@ target 'Recipe' do
   pod 'EasyPopUp'
   #search with suggestions
   pod 'SearchTextField'
+	#promises
+	pod 'PromiseKit', '~> 6.0'
 end
 
