@@ -153,6 +153,7 @@
                         <viewLayoutGuide key="safeArea" id="Mgo-Qo-ZFq"/>
                     </view>
                     <connections>
+                        <outlet property="recipeAuthor" destination="a30-dx-Koe" id="gMA-Qu-lCe"/>
                         <outlet property="recipeDescription" destination="IGQ-rE-PeH" id="fM7-9A-s9O"/>
                         <outlet property="recipeIngredients" destination="2yC-tV-hdd" id="Vad-Jb-lNm"/>
                         <outlet property="recipeName" destination="VWn-cA-Ib6" id="VaP-XI-juo"/>

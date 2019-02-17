@@ -16,6 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //	@IBOutlet weak var tabBar: UITabBar!x
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        FirebaseApp.configure()
 //         Override point for customization after application launch.
 		configureTabBar();
         return true

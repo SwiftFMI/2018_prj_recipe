@@ -19,42 +19,25 @@ class ExploreController: UIViewController {
 	}
 
     // Array of ShortRecipe, which can be found in RecipeTestClass.swift
-    var shortRecipes: [ShortRecipe] = []
+    var shortRecipes: [Recipe] = []
     
     override func loadView() {
         super.loadView()
-        FirebaseApp.configure()
-        
-        var ref: DatabaseReference!
-        ref = Database.database().reference(withPath: "/")
-        
-        var index = 0;
-        ref.child("short-recipes").observe(.childAdded) { (snapshot) in
-            let name = snapshot.childSnapshot(forPath: "name").value as! String
-            let shortIngredientList = snapshot.childSnapshot(forPath: "shortIngredientList").value as! String
-            let shortDescription = snapshot.childSnapshot(forPath: "shortDescription").value as! String + " [" + shortIngredientList + "]"
-            
-            let minutesToCook = snapshot.childSnapshot(forPath: "minutesToCook").value ?? ""
-            let minutesToPrepare = snapshot.childSnapshot(forPath: "minutesToPrepare").value ?? ""
-            let recipeID = snapshot.key
-            
-            let sr = ShortRecipe(name: name, description: shortDescription, photo: #imageLiteral(resourceName: "test.jpg"), timeToPrepare: "\(minutesToPrepare)" , timeToCook: "\(minutesToCook)", recipeID: recipeID)!
-            
-            if index < 4 {
-                self.shortRecipes[index] = sr
-            }
-            index += 1
-            self.kolodaView.reloadData()
-        }
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // new part:
-        let defauiltShortRecipe = ShortRecipe(name: "DefaultRecipe", description: "DefaultRecipeDescription", photo: #imageLiteral(resourceName: "DefaulRecipeImage"))!
+        let defauiltShortRecipe = Recipe()
+        defauiltShortRecipe.reload = { () in
+            self.kolodaView.reloadData()
+        }
+        defauiltShortRecipe.getShortRecipe(recipeID: "1")
+        
         for _ in 0...4 {
             shortRecipes.append(defauiltShortRecipe)
+            
         }
         kolodaView.dataSource = self
         kolodaView.delegate = self
@@ -85,32 +68,14 @@ extension ExploreController: KolodaViewDelegate {
     }
     
     func koloda(_ koloda: KolodaView, didSelectCardAt index: Int) {
-        // When clicked on the recipe, needs to go to screen for it.
-//        let currentRecipe = shortRecipes[index]
-        var ref: DatabaseReference!
-        ref = Database.database().reference(withPath: "/")
-        let currentRecipe = shortRecipes[index]
-        ref.child("recipes/\(currentRecipe.id)").observe(.value) { (snapshot) in
-            currentRecipe.author = snapshot.childSnapshot(forPath: "author").value as? String
-            currentRecipe.longDescription = snapshot.childSnapshot(forPath: "longDescription").value as? String
-//            currentRecipe.ingredients =  as? String
-            let ingredients = snapshot.childSnapshot(forPath: "ingredients").value as! NSDictionary
-            var array = [String]()
-            for (ingredient, amount) in ingredients {
-                array += ["\(ingredient) \(amount)"]
-            }
-            
-            currentRecipe.ingredients = array.joined(separator:" ")
-            
-//            a.
-            let recipeOverviewController = RecipeOverviewController.instantiate(fromAppStoryboard: .RecipeOverviewController);
-//            recipeOverviewController.currentRecipe = p shortRecipes[index]
-            self.present(recipeOverviewController, animated: true, completion: nil);
-        }
         
         
-//        performSegue(withIdentifier: "fullRecipe", sender: nil)
-        //prepare(for: , sender: <#T##Any?#>
+        let recipeOverviewController = RecipeOverviewController.instantiate(fromAppStoryboard: .RecipeOverviewController);
+        
+        ///
+        shortRecipes[index].callFirebaseAndUpdateCurrentRecipeInView(view: recipeOverviewController)
+        self.present(recipeOverviewController, animated: true, completion: nil);
+        
     }
 }
 
@@ -131,8 +96,7 @@ extension ExploreController: KolodaViewDataSource {
 
         let data = shortRecipes[index]
         swiper.caption = data.name
-        swiper.image = data.photo
-        swiper.shorDescription = data.description
+        swiper.shorDescription = data.shortDescription
         swiper.timeToPrepare = data.timeToPrepare
         swiper.timeToCook = data.timeToCook
         return swiper
