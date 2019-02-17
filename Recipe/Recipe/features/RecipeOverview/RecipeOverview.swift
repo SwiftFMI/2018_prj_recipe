@@ -31,7 +31,7 @@ class RecipeOverviewController: UIViewController {
 //        self.recipeTimeToCook.text = currentRecipe.timeToCook
 //        self.recipeIngredients.text = currentRecipe.ingredients
 //        self.recipeAuthor.text = "Mihail Kirilov"
-//        super.viewDidLoad();
+//        super.viewDidLoad(); 
 	}
 	override func viewWillLayoutSubviews(){
 		super.viewWillLayoutSubviews();
