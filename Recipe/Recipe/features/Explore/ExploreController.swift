@@ -18,7 +18,9 @@ class ExploreController: UIViewController {
 
     // Array of ShortRecipe, which can be found in RecipeTestClass.swift
     var shortRecipes: [Recipe] = []
-    
+    var usedRecipes: [String] = []
+    var numberOfKolodaCartds: Int = 2
+    let arrayWithAllRecipeIDS: [String] = Array(cachedRecipeIDS.keys)
 //    override func loadView() {
 //        super.loadView()
 //    }
@@ -33,31 +35,57 @@ class ExploreController: UIViewController {
 //            self.kolodaView.reloadData()
 //        }
 //        defauiltShortRecipe.getShortRecipe(recipeID: "1")
-		var recepiesInitiator:[Promise<Recipe>] = [];
-        for index in 0...4 {
-            //must be a promise
-            let a = cachedRecipeIDS
-			let recipe = Recipe(id:"-LZ0vOGdCm5ptGACQhdP");
-            recepiesInitiator.append(recipe.getShortRecipe())
-        }
-		
-		when(fulfilled: recepiesInitiator).done { (result:[Recipe]) in
-			self.shortRecipes = result;
-			self.kolodaView.dataSource = self
-			self.kolodaView.delegate = self
-			self.loadingView.isHidden = true;
-		}
+        self.loadRecipesIntoKoloda()
+        
 		loadingView.isHidden = false;
         kolodaView.layer.cornerRadius = 5
         kolodaView.layer.masksToBounds = true
+    }
+    
+    func loadRecipesIntoKoloda() -> Void {
+        var recepiesInitiator:[Promise<Recipe>] = [];
+        for _ in 0..<self.numberOfKolodaCartds {
+            let arrayWithAllUnusedRecipes = arrayWithAllRecipeIDS.filter { !usedRecipes.contains($0) }
+            
+            if arrayWithAllUnusedRecipes.count > 0 {
+                let randomID = Int.random(in: 0 ..< arrayWithAllUnusedRecipes.count)
+                let currentRecipeId = arrayWithAllUnusedRecipes[randomID]
+                usedRecipes.append(currentRecipeId)
+                let recipe = Recipe(id:currentRecipeId);
+                recepiesInitiator.append(recipe.getShortRecipe())
+            }else{
+                
+            }
+            
+            if arrayWithAllUnusedRecipes.count < self.numberOfKolodaCartds{
+                self.numberOfKolodaCartds = arrayWithAllUnusedRecipes.count
+            }
+        }
+        
+        when(fulfilled: recepiesInitiator).done { (result:[Recipe]) in
+            self.shortRecipes = result;
+
+            if (self.usedRecipes.count == self.numberOfKolodaCartds) {
+                self.kolodaView.dataSource = self
+                self.kolodaView.delegate = self
+            }
+            if self.loadingView.isHidden != true{
+                self.loadingView.isHidden = true
+            }
+        }
     }
 }
 
 extension ExploreController: KolodaViewDelegate {
     func kolodaDidRunOutOfCards(_ koloda: KolodaView) {
-
-        kolodaView.resetCurrentCardIndex()
-        kolodaView.reloadData()
+        let arrayWithAllUnusedRecipes = arrayWithAllRecipeIDS.filter { !usedRecipes.contains($0) }
+        
+        if arrayWithAllUnusedRecipes.count != 0{
+            kolodaView.resetCurrentCardIndex()
+            self.loadRecipesIntoKoloda()
+        }else{
+            
+        }
     }
     
     func koloda(_ koloda: KolodaView, didSelectCardAt index: Int) {
@@ -72,7 +100,7 @@ extension ExploreController: KolodaViewDelegate {
 
 extension ExploreController: KolodaViewDataSource {
     func kolodaNumberOfCards(_ koloda: KolodaView) -> Int {
-		return 3 ;
+		return self.numberOfKolodaCartds ;
         
     }
     

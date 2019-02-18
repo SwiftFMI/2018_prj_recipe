@@ -6,6 +6,7 @@
 //  Copyright © 2019 Mihail Kirilov. All rights reserved.
 //
 import RAMAnimatedTabBarController;
+import Firebase;
 
 class TabBarController: RAMAnimatedTabBarController {
 	override func viewDidLoad() {
@@ -13,9 +14,11 @@ class TabBarController: RAMAnimatedTabBarController {
 		
 		
 		ref.child("allRecipeIDs").observe(.value) { (snapshot) in
-			
-			cachedRecipeIDS[snapshot.key ?? ""] = ""
-			
+            let enumerator = snapshot.children
+            while let rest = enumerator.nextObject() as? DataSnapshot {
+                self.addRecipeIdToCache(snapshot: rest)
+            }
+            
 			let exploreScene = ExploreController.instantiate(fromAppStoryboard: .Explore);
 			let favouritesScene = FavouritesController.instantiate(fromAppStoryboard: .Favourites);
 			let shoppingListScene = ShoppingListController.instantiate(fromAppStoryboard: .ShoppingList);
@@ -24,7 +27,14 @@ class TabBarController: RAMAnimatedTabBarController {
 			
 			self.viewControllers = [exploreScene,favouritesScene,shoppingListScene,createRecipeScene,abaoutScene];
 		}
-		print("asd");
+		
+        ref.child("allRecipeIDs").observe(.childAdded){ (snapshot) in
+            self.addRecipeIdToCache(snapshot: snapshot)
+        }
 	}
+    
+    private func addRecipeIdToCache(snapshot: DataSnapshot){
+        cachedRecipeIDS[snapshot.key] = ""
+    }
 	
 }
