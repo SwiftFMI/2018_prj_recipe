@@ -66,9 +66,10 @@ struct RecipeShortData:ShortRecipeProtocol {
 	
 	var id: String
 	
-	init(timeToPrepare:String,timeToCook:String,shortDescription:String,shortIngredientList:String,name:String,id:String){
+    init(timeToPrepare:String,timeToCook:String,shortDescription:String,shortIngredientList:String,name:String,id:String){
 		self.id = id;
 		self.timeToCook = timeToCook;
+        self.timeToPrepare = timeToPrepare
 		self.shortDescription = shortDescription;
 		self.shortIngredientList = shortIngredientList;
 		self.name = name;

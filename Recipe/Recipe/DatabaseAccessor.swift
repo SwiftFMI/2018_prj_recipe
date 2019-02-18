@@ -46,11 +46,6 @@ class RecipeDatabase{
 					name:"\(snapshot.childSnapshot(forPath: "name").value ?? "")",
 					id: id)
 				dfd.resolve(shortRecipeData, nil);
-//					self.name = snapshot.childSnapshot(forPath: "name").value as? String
-//					self.shortDescription = snapshot.childSnapshot(forPath: "shortDescription").value as? String
-//					self.timeToPrepare = "\(snapshot.childSnapshot(forPath: "minutesToPrepare").value ?? "")"
-//					self.timeToCook = "\(snapshot.childSnapshot(forPath: "minutesToCook").value ?? "")"
-//					self.shortIngredientList = snapshot.childSnapshot(forPath: "shortIngredientList").value as? String
 			}
 		}
 	}
