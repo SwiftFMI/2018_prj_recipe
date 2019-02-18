@@ -35,7 +35,9 @@ class ExploreController: UIViewController {
 //        defauiltShortRecipe.getShortRecipe(recipeID: "1")
 		var recepiesInitiator:[Promise<Recipe>] = [];
         for index in 0...4 {
-			let recipe = Recipe(id:"1");
+            //must be a promise
+            let a = cachedRecipeIDS
+			let recipe = Recipe(id:"-LZ0vOGdCm5ptGACQhdP");
             recepiesInitiator.append(recipe.getShortRecipe())
         }
 		
@@ -70,7 +72,7 @@ extension ExploreController: KolodaViewDelegate {
 
 extension ExploreController: KolodaViewDataSource {
     func kolodaNumberOfCards(_ koloda: KolodaView) -> Int {
-		return 10;
+		return 3 ;
         
     }
     

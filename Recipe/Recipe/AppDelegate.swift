@@ -24,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		let ref: DatabaseReference! = Database.database().reference(withPath: "/")
 		// Cache is your number one friend
 
-        ref.child("allIngredientIDs").observe(.childAdded) { (snapshot) in
+        ref.child("allRecipeIDs").observe(.childAdded) { (snapshot) in
             cachedRecipeIDS[snapshot.key ?? ""] = ""
         }
 		ref.child("ingredients").observe(.childAdded) { (snapshot) in
