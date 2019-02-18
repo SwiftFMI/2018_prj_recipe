@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
+    <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -15,9 +15,64 @@
             <objects>
                 <viewController storyboardIdentifier="FavouritesController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="VJJ-1F-AM0" customClass="FavouritesController" customModule="Recipe" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="6Z9-sz-KwH">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.078704629410000004" green="0.0" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Favourites" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IAk-5r-7hs">
+                                <rect key="frame" x="0.0" y="44" width="375" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="oRm-rG-g7a"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="5a0-H3-5qB">
+                                <rect key="frame" x="0.0" y="104" width="375" height="674"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="favouriteCellReuse" rowHeight="80" id="GLB-Jr-MXz" customClass="FavouriteTableCellView" customModule="Recipe" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="80"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="GLB-Jr-MXz" id="cvR-gh-Mq5">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="DefaulRecipeImage" translatesAutoresizingMaskIntoConstraints="NO" id="oZl-fx-TD0">
+                                                    <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hdW-L2-1TV">
+                                                    <rect key="frame" x="93" y="0.0" width="267" height="80"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" name="Georgia" family="Georgia" pointSize="21"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="recipeImage" destination="oZl-fx-TD0" id="x2T-Pa-yDx"/>
+                                            <outlet property="recipeLabel" destination="hdW-L2-1TV" id="87P-zc-P2v"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="VJJ-1F-AM0" id="jOj-lJ-gFC"/>
+                                    <outlet property="delegate" destination="VJJ-1F-AM0" id="CMg-gs-hic"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="0.58379335669999999" blue="0.1897892541" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <constraints>
+                            <constraint firstItem="EW5-bM-ylH" firstAttribute="trailing" secondItem="IAk-5r-7hs" secondAttribute="trailing" id="LCp-4M-Pxb"/>
+                            <constraint firstItem="IAk-5r-7hs" firstAttribute="leading" secondItem="EW5-bM-ylH" secondAttribute="leading" id="Nf0-v8-edw"/>
+                            <constraint firstItem="EW5-bM-ylH" firstAttribute="trailing" secondItem="5a0-H3-5qB" secondAttribute="trailing" id="VBk-mH-TP7"/>
+                            <constraint firstItem="IAk-5r-7hs" firstAttribute="top" secondItem="EW5-bM-ylH" secondAttribute="top" id="anO-hM-mb8"/>
+                            <constraint firstItem="EW5-bM-ylH" firstAttribute="bottom" secondItem="5a0-H3-5qB" secondAttribute="bottom" id="dSk-D2-8zs"/>
+                            <constraint firstItem="5a0-H3-5qB" firstAttribute="leading" secondItem="EW5-bM-ylH" secondAttribute="leading" id="jia-c5-O0K"/>
+                            <constraint firstItem="5a0-H3-5qB" firstAttribute="top" secondItem="IAk-5r-7hs" secondAttribute="bottom" id="u9K-H1-I1W"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="EW5-bM-ylH"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Favourites" image="favourite.png" id="qmT-Cg-qxS" customClass="RAMAnimatedTabBarItem" customModule="RAMAnimatedTabBarController">
@@ -25,14 +80,18 @@
                             <outlet property="animation" destination="HQ1-fK-3dm" id="ezY-Y7-ZCa"/>
                         </connections>
                     </tabBarItem>
+                    <connections>
+                        <outlet property="table" destination="5a0-H3-5qB" id="ccq-GS-I9y"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AfB-Bb-PLc" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <customObject id="HQ1-fK-3dm" customClass="RAMBounceAnimation" customModule="RAMAnimatedTabBarController"/>
             </objects>
-            <point key="canvasLocation" x="1401" y="-522"/>
+            <point key="canvasLocation" x="1400.8" y="-522.41379310344826"/>
         </scene>
     </scenes>
     <resources>
-        <image name="favourite.png" width="50" height="50"/>
+        <image name="DefaulRecipeImage" width="1400" height="980"/>
+        <image name="favourite.png" width="25" height="25"/>
     </resources>
 </document>
