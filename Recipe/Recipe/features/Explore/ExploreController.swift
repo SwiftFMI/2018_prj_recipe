@@ -35,7 +35,7 @@ class ExploreController: UIViewController {
 //        defauiltShortRecipe.getShortRecipe(recipeID: "1")
 		var recepiesInitiator:[Promise<Recipe>] = [];
         for index in 0...4 {
-			let recipe = Recipe(id:String(index+1));
+			let recipe = Recipe(id:"1");
             recepiesInitiator.append(recipe.getShortRecipe())
         }
 		
