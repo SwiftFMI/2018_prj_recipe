@@ -14,31 +14,22 @@ import PromiseKit
 var ref: DatabaseReference! = Database.database().reference(withPath: "/")
 
 class Ingredient {
-    var key: String = ""
-    var name: String = ""
-    var quantity: Float = 0.0
-    var measuringUnit: (String, String) = ("kg", "gr")
-    var image: UIImage = UIImage(imageLiteralResourceName: "Apple")
-    
+	var key: String = "";
+	var name: String = "";
+	var quantity: Float = 0.0;
+	var measuringUnit: (String, String) = ("kg", "gr");
+	var image: UIImage? = nil;
+	
     init(key: String, quantity: Float){
-        self.key = key
-        self.quantity = quantity
-        
-//        ref.child("ingredients/\(key)").add{ (snapshot) in
-//            if !snapshot.exists() {
-//                self.name = self.key
-//            }else{
-//                self.name = snapshot.childSnapshot(forPath: "name").value as! String
-//                let isLiquid = snapshot.childSnapshot(forPath: "isLuquid")
-//                let isQuantity = snapshot.childSnapshot(forPath: "isQuantity")
-//                if isLiquid.exists(){
-//                    self.measuringUnit = ("l", "ml")
-//                }else if isQuantity.exists(){
-//                    self.measuringUnit = ("", "")
-//                }
-//                self.image = UIImage(imageLiteralResourceName: self.key)
-//            }
-//        }
+		self.key = key
+		self.quantity = quantity
+		self.name = cachedIngredientList[key]?["name"] ?? key
+		if cachedIngredientList[key]?["isLiquid"] == "true" {
+			self.measuringUnit = ("l", "ml")
+		}else if cachedIngredientList[key]?["isQuantity"] == "true" {
+			self.measuringUnit = ("","")
+		}
+		self.image = UIImage(named: key)
     }
 }
 

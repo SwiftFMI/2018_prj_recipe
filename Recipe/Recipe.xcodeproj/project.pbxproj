@@ -191,6 +191,7 @@
 		2330CA59219C697600E95BE3 /* Recipe */ = {
 			isa = PBXGroup;
 			children = (
+				A08EDFB9221A813F00D3ED3B /* Models */,
 				A00B470E21FFBCB500381BE7 /* features */,
 				2330CA5A219C697700E95BE3 /* AppDelegate.swift */,
 				23F70A0121DE919000DDF026 /* GoogleService-Info.plist */,
@@ -340,6 +341,13 @@
 				A08EDFB3221882F300D3ED3B /* RecipeOverview.swift */,
 			);
 			path = RecipeOverview;
+			sourceTree = "<group>";
+		};
+		A08EDFB9221A813F00D3ED3B /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		DDF7BC8BE79B4E999B89DFF9 /* Frameworks */ = {
