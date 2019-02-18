@@ -15,6 +15,7 @@ class RecipeOverviewController: UIViewController,UITableViewDelegate,UITableView
 	@IBOutlet weak var timeToPrepare: UILabel!
 	@IBOutlet weak var timeToCook: UILabel!
 	
+	@IBOutlet weak var instructionsView: UITextView!
 	@IBOutlet weak var ingredientsTableHeightConstraint: NSLayoutConstraint!
 	@IBOutlet weak var scrollView: UIScrollView!
 	@IBOutlet weak var recipeName: UILabel!
@@ -26,10 +27,6 @@ class RecipeOverviewController: UIViewController,UITableViewDelegate,UITableView
 	
 	func setModel(recipe data:Recipe){
 		self.recipeModel = data;
-//		self.recipeModel = Recipe();
-//		self.recipeModel?.author = data.author;
-//		self.recipeModel?.longDescription = data.desc;
-//		self.recipeModel?.ingredients = data.ingredients as! [Ingredient];
 	}
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -48,16 +45,17 @@ class RecipeOverviewController: UIViewController,UITableViewDelegate,UITableView
 		self.dismiss(animated: true, completion: nil);
 	}
 	override func viewDidAppear(_ animated: Bool) {
-		scrollView.contentSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height);
+		instructionsView.sizeToFit();
+		instructionsView.isScrollEnabled = false;
+		scrollView.contentSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height+instructionsView.frame.height);
+		
 	}
 	
 	override func viewDidLoad() {
 		if self.recipeModel != nil {
 			self.recipeName.text = recipeModel!.name
-//			self.recipeDescription?.text = recipeModel!.shortDescription
 			self.timeToPrepare.text = recipeModel!.timeToPrepare
 			self.timeToCook.text = recipeModel!.timeToCook
-//			self.recipeIngredients.text = "aaaaaaa"
 			self.recipeAuthor.text = recipeModel!.author
 			let tableHeight =
 				(self.recipeModel?.ingredients.count)! * 45
