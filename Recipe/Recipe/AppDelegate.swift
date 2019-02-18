@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 var cachedIngredientList: [String: [String: String]] = [:]
+var cachedRecipeIDS: [String: String] = [:]
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -22,6 +23,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		
 		let ref: DatabaseReference! = Database.database().reference(withPath: "/")
 		// Cache is your number one friend
+
+        ref.child("allIngredientIDs").observe(.childAdded) { (snapshot) in
+            cachedRecipeIDS[snapshot.key ?? ""] = ""
+        }
 		ref.child("ingredients").observe(.childAdded) { (snapshot) in
 			let name = snapshot.childSnapshot(forPath: "name").value as! String
 			var isLiquid = ""
