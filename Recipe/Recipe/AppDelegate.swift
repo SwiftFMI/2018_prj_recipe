@@ -11,6 +11,7 @@ import Firebase
 var cachedIngredientList: [String: [String: String]] = [:]
 var cachedRecipeIDS: [String: String] = [:]
 
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 	
@@ -21,25 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		//         Override point for customization after application launch.
 		FirebaseApp.configure()
 		
-		let ref: DatabaseReference! = Database.database().reference(withPath: "/")
-		// Cache is your number one friend
-
-        ref.child("allRecipeIDs").observe(.childAdded) { (snapshot) in
-            cachedRecipeIDS[snapshot.key ?? ""] = ""
-        }
-		ref.child("ingredients").observe(.childAdded) { (snapshot) in
-			let name = snapshot.childSnapshot(forPath: "name").value as! String
-			var isLiquid = ""
-			var isQuantity = ""
-			if snapshot.childSnapshot(forPath: "isLuquid").exists(){
-				isLiquid = "true"
-			}else if snapshot.childSnapshot(forPath: "isQuantity").exists(){
-				isQuantity = "true"
-			}
-			cachedIngredientList[snapshot.key] = ["name": name, "isLiquid": isLiquid, "isQuantity": isQuantity];
-			UIApplication.shared.endIgnoringInteractionEvents();
-		}
-		UIApplication.shared.beginIgnoringInteractionEvents()
+		
 		return true
 		
 	}

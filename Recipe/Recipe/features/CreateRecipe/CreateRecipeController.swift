@@ -9,16 +9,21 @@
 import Foundation;
 import UIKit;
 import Firebase;
+import SearchTextField;
 
 
-class CreateRecipeController: UIViewController {
-//	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    @IBOutlet weak var nameOfTheRecipeTextField: UITextField!
+class CreateRecipeController: UIViewController,UITableViewDelegate,UITableViewDataSource,RemoveIngredientViewCellDelegate,AddIngredientViewCellDelegate {
+	@IBOutlet weak var scrollContentView: NSLayoutConstraint!
+	@IBOutlet weak var scrollView: UIScrollView!
+	@IBOutlet weak var nameOfTheRecipeTextField: UITextField!
     @IBOutlet weak var shortDescriptionRecipeTextView: UITextView!
     @IBOutlet weak var longDescriptionRecipeTextView: UITextView!
     @IBOutlet weak var timeToPrepareTextField: UITextField!
     @IBOutlet weak var timeToCookTextField: UITextField!
     @IBOutlet weak var authorTextField: UITextField!
+	@IBOutlet weak var ingredientsTable: UITableView!
+	
+	var ingredients:[Ingredient] = [Ingredient(key: "Banana", quantity: 1)];
     
     @IBAction func createRecipe(_ sender: Any) {
         
@@ -50,14 +55,160 @@ class CreateRecipeController: UIViewController {
         
         ref.updateChildValues(recipeData)
     }
-    //		return;
-//	}
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		// + 1 is cuz we want 1 extra cell for adding data
+		return ingredients.count + 1;
+	}
 	
-//	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//		return;
-//	}
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		if indexPath.row < ingredients.count {
+			let cell = tableCellFactory(identifier: "addedRow", indexPath: indexPath) as! AddedCell;
+			cell.initInternal(ingredient: ingredients[indexPath.row]);
+			cell.delegate = self;
+			return cell as UITableViewCell
+		}else{
+			let cell = tableCellFactory(identifier: "addingRow", indexPath: indexPath) as! AddingCell;
+			cell.initInternal();
+			cell.delegate = self;
+			return cell as UITableViewCell;
+		}
+	}
+	
+	func addIngredientDelegateHandler(name:String,quantity:String){
+		let ingredient = Ingredient(key: name, quantity: Float(quantity)!);
+		self.ingredients.append(ingredient);
+		self.ingredientsTable.beginUpdates();
+		self.ingredientsTable.insertRows(at: [IndexPath(row: self.ingredients.count-1, section: 0)], with: .automatic);
+		self.ingredientsTable.endUpdates();
+	}
+	
+	func removeIngredientDelegateHandler(){
+		
+		
+	}
+	
+	func tableCellFactory(identifier:String,indexPath:IndexPath)->UITableViewCell{
+		let cell = self.ingredientsTable.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! IngredientsTableCell;
+		return cell as UITableViewCell;
+	}
 	
 	override func viewDidLoad() {
 		super.viewDidLoad();
+	}
+	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		registerNotifications()
+	}
+	
+	override func viewWillDisappear(_ animated: Bool) {
+		super.viewWillDisappear(animated)
+		unregisterNotifications()
+	}
+	
+	private func registerNotifications() {
+		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+	}
+	
+	private func unregisterNotifications() {
+		NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+		NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+	}
+	
+	@IBAction func hideKeyboard(_ sender: Any) {
+		self.nameOfTheRecipeTextField.endEditing(true);
+		self.shortDescriptionRecipeTextView.endEditing(true);
+		self.longDescriptionRecipeTextView.endEditing(true);
+		self.timeToPrepareTextField.endEditing(true);
+		self.timeToCookTextField.endEditing(true);
+		self.authorTextField.endEditing(true);
+		let lastCell = self.ingredientsTable.visibleCells[self.ingredientsTable.visibleCells.count-1] as! AddingCell;
+		lastCell.ingredientTypeField.endEditing(true);
+		lastCell.quantityField.endEditing(true);
+	}
+	
+	@objc func keyboardWillShow(notification: NSNotification){
+		guard let keyboardFrame = notification.userInfo![UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
+		scrollView.contentInset.bottom = view.convert(keyboardFrame.cgRectValue, from: nil).size.height;
+		
+	}
+	
+	@objc func keyboardWillHide(notification: NSNotification){
+		scrollView.contentInset.bottom = 0;
+	}
+}
+
+protocol RemoveIngredientViewCellDelegate: AnyObject {
+	func removeIngredientDelegateHandler()
+}
+
+protocol AddIngredientViewCellDelegate: AnyObject {
+	func addIngredientDelegateHandler(name:String,quantity:String)
+}
+
+
+class IngredientsTableCell: UITableViewCell{
+	func initInternal(){
+		fatalError("Override in child classes")
+	}
+}
+
+class AddedCell: IngredientsTableCell {
+	@IBOutlet weak var ingredientImage: UIImageView!
+	@IBOutlet weak var ingradientName: UILabel!
+	@IBOutlet weak var quantityIdentifier: UILabel!
+	weak var delegate : RemoveIngredientViewCellDelegate?;
+	@IBAction func removeIngredient(_ sender: UIButton) {
+		if let _ = delegate {
+			self.delegate?.removeIngredientDelegateHandler();
+		}
+	}
+	func initInternal(ingredient:Ingredient) {
+		ingradientName.text = ingredient.name;
+		ingredientImage.image = ingredient.image;
+		self.quantityIdentifier.text = "\(String(ingredient.quantity) )" + "\(ingredient.measuringUnit.0)"
+	}
+}
+
+class AddingCell: IngredientsTableCell{
+	@IBOutlet weak var ingredientTypeField: SearchTextField!
+	@IBOutlet weak var quantityField: UITextField!
+	weak var delegate : AddIngredientViewCellDelegate?;
+	var selectedIngredientKey:String?;
+	@IBAction func addIngredient(_ sender: UIButton) {
+		if let _ = delegate {
+			if selectedIngredientKey == nil{
+				self.selectedIngredientKey = Array(cachedIngredientList).first(where: {
+					$0.value["name"] == ingredientTypeField.text;
+				})?.key;
+			}
+			self.delegate?.addIngredientDelegateHandler(name:self.selectedIngredientKey!,
+														quantity:quantityField.text != "" ? quantityField.text! : String(1));
+		}
+	}
+	
+	override func initInternal() {
+		var ingredientItems:[IngredientSearchItem] = []
+		for (key,value) in Array(cachedIngredientList){
+			let item = IngredientSearchItem(key:key, title: value["name"]!, subtitle: "", image:UIImage.getImageOrDefault(named: key));
+			ingredientItems.append(item);
+		}
+		self.ingredientTypeField.filterItems(ingredientItems);
+		
+		self.ingredientTypeField.itemSelectionHandler = { filteredResults, itemPosition in
+			let item = filteredResults[itemPosition] as! IngredientSearchItem;
+			self.selectedIngredientKey = item.ingredientKey;
+			self.ingredientTypeField.text = item.title;
+		}
+	}
+}
+
+class IngredientSearchItem:SearchTextFieldItem{
+	var ingredientKey:String="";
+	init(key:String,title: String, subtitle: String?, image: UIImage?) {
+		self.ingredientKey = key;
+		super.init(title: title);
+//		super.init(title: title, subtitle: subtitle, image: image);
 	}
 }

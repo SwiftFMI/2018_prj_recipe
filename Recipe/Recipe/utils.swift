@@ -69,3 +69,13 @@ extension UIViewController {
 //		view.endEditing(true)
 //	}
 //}
+
+extension UIImage {
+	public static func getImageOrDefault(named name:String)->UIImage {
+		if let image = UIImage(named: name){
+			return image;
+		}
+		return UIImage(named: "ShoppingCart")!;
+	
+	}
+}

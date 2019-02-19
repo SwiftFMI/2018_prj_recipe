@@ -29,7 +29,7 @@ class Ingredient {
 		}else if cachedIngredientList[key]?["isQuantity"] == "true" {
 			self.measuringUnit = ("","")
 		}
-		self.image = UIImage(named: key)
+		self.image = UIImage.getImageOrDefault(named: key)
     }
 }
 
