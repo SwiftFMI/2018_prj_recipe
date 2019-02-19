@@ -9,32 +9,60 @@
 import Foundation;
 import UIKit;
 import PromiseKit;
+import Disk;
 
 class FavouritesController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 	
     var favourites = [Recipe]()
-    
+    //var favouritesIds = [String]()
+    var favouritesIds: Set<String> = []
+    let pathToFavouritesIds = "Recipes/favouriteData.json"
     var defaultRecipe = Recipe(id: "1")
     @IBOutlet weak var table: UITableView!
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        let encoder = JSONEncoder()
+        try? Disk.save(favouritesIds, to: .caches, as: pathToFavouritesIds, encoder: encoder)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        let decoder = JSONDecoder()
+        var recipesInitiator: [Promise<Recipe>] = [];
+        
+        if Disk.exists(pathToFavouritesIds, in: .caches) {
+            let data = try? Disk.retrieve(pathToFavouritesIds, from: .caches, as: Set<String>.self, decoder: decoder)
+            
+            if data != nil {
+                favouritesIds = data!
+                let sortedIds = data?.sorted()
+                for id in sortedIds! {
+                    let recipe = Recipe(id: id)
+                    recipesInitiator.append(recipe.getShortRecipe())
+                }
+                _ = when(fulfilled: recipesInitiator).done {
+                    (result: [Recipe]) in
+                    self.favourites = result
+                    
+                    self.table.reloadData()
+                }
+            } else {
+                self.favourites = []
+            }
+        }
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        //var recipePromise = defaultRecipe.getShortRecipe()
-        /*for _ in 1...5 {
-            favourites.append(defaultRecipe)
-        }*/
         table.rowHeight = 80
-        
-        var recepiesInitiator: [Promise<Recipe>] = [];
-        for _ in 0...4 {
-            let recipe = Recipe(id:String(1));
-            recepiesInitiator.append(recipe.getShortRecipe())
-        }
-        
-        when(fulfilled: recepiesInitiator).done { (result:[Recipe]) in
-            self.favourites = result;
-            self.table.reloadData()
-        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -51,10 +79,18 @@ class FavouritesController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let recipeOverviewController = RecipeOverviewController.instantiate(fromAppStoryboard: .RecipeOverviewController);
-        favourites[indexPath.row].getFullRecipe()
+        _ = favourites[indexPath.row].getFullRecipe()
             .done{(recipe:Recipe) in
                 recipeOverviewController.setModel(recipe: recipe);
                 self.present(recipeOverviewController, animated: true, completion: nil);
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            favouritesIds.remove(favourites[indexPath.row].id)
+            favourites.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
     
@@ -68,7 +104,6 @@ class FavouriteTableCellView: UITableViewCell {
     func initInternal(data: Recipe){
         self.recipeLabel.text = data.name
         self.recipeImage.image = #imageLiteral(resourceName: "test5.jpg")
-        print("Ok")
     }
 }
 
