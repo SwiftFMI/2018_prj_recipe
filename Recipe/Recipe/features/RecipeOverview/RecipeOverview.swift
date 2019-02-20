@@ -97,15 +97,15 @@ class RecipeOverviewController: UIViewController,UITableViewDelegate,UITableView
 					if data?.first(where: {
 						$0 == self.recipeModel?.id;
 					}) != nil {
-						self.favouritesIcon.image = UIImage(named:"Apple");
+						self.favouritesIcon.image = UIImage(named:"Star");
 						self.isFavourited = true;
 					}else{
 						self.isFavourited = false;
-						self.favouritesIcon.image = UIImage(named: "Avocado");
+						self.favouritesIcon.image = UIImage(named: "StarOutline");
 					}
 				}
 			}else {
-				self.favouritesIcon.image = UIImage(named: "Avocado");
+				self.favouritesIcon.image = UIImage(named: "StarOutline");
 			}
 			
 		}
@@ -118,7 +118,7 @@ class RecipeOverviewController: UIViewController,UITableViewDelegate,UITableView
 	@IBAction func addAndRemoveFromFavourites(_ sender: Any) {
 		isFavourited = !isFavourited;
 		isFavouritedChanged = true;
-		favouritesIcon.image = isFavourited ? UIImage(named: "Apple") : UIImage(named: "Avocado");
+		favouritesIcon.image = isFavourited ? UIImage(named: "Star") : UIImage(named: "StarOutline");
 	}
 	@IBAction func addToShoppingcartHandler(_ sender: Any) {
 		try? Disk.save(recipeModel?.ingredients, to: .caches, as: pathToShoppingList,encoder:JSONEncoder());
