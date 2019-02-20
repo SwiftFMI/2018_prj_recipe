@@ -25,7 +25,7 @@ class RecipeOverviewController: UIViewController,UITableViewDelegate,UITableView
 	@IBOutlet weak var scrollView: UIScrollView!
 	@IBOutlet weak var recipeName: UILabel!
     @IBOutlet weak var recipeAuthor: UILabel!
-//    @IBOutlet weak var recipeDescription: UILabel!
+    @IBOutlet weak var recipeDescription: UITextView!
 	@IBOutlet weak var ingredientsTable: UITableView!
 	
 	private var isFavourited = false;
@@ -84,6 +84,7 @@ class RecipeOverviewController: UIViewController,UITableViewDelegate,UITableView
 			self.timeToPrepare.text = recipeModel!.timeToPrepare
 			self.timeToCook.text = recipeModel!.timeToCook
 			self.recipeAuthor.text = recipeModel!.author
+            self.recipeDescription.text = (recipeModel!.shortDescription ?? "") + (recipeModel!.longDescription ?? "")
 			let tableHeight =
 				(self.recipeModel?.ingredients.count)! * 45
 			self.ingredientsTableHeightConstraint.constant = CGFloat(tableHeight);
