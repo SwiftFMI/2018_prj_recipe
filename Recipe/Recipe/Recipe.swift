@@ -88,7 +88,7 @@ extension Ingredient: Encodable
 		try container.encode(title, forKey: .name);
 		try container.encode(quantity, forKey: .quantity);
 		try container.encode(measuringUnit.0, forKey: .measuringUnitMin);
-		try container.encode(measuringUnit.1, forKey: .measuringUnitMin);
+		try container.encode(measuringUnit.1, forKey: .measuringUnitMax);
 	}
 }
 

@@ -29,25 +29,22 @@ class ShoppingListController: UIViewController,UITableViewDelegate,UITableViewDa
 	
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated);
-//		self.tableData
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
-		
-		let decoder = JSONDecoder();
-		
-		let encoder = JSONEncoder();
-		try? Disk.save(tableData, to: Disk.Directory.caches, as: "Recipes/shoppinglistData.json",encoder:encoder);
-		
-		let data = try? Disk.retrieve("Recipes/shoppinglistData.json", from: Disk.Directory.caches, as: [Ingredient].self, decoder: decoder);
-//		TEST
-//		data = tableData;
+		var data:[Ingredient]? = nil;
+		do {
+			data = try Disk.retrieve("Recipes/shoppinglistData.json", from: .caches, as: [Ingredient].self, decoder: JSONDecoder());
+		}catch{
+			print("Cannot trive shopping list");
+		}
 		if data != nil && data!.count > 0 {
 			self.tableData = data!;
 			self.emptyListPlaceholder.isHidden=true;
 		}else{
 			self.tableData = [];
 		}
+		self.table.reloadData();
 	}
 	
 	@IBAction func completeTouchHandler(_ sender: UIButton) {

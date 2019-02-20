@@ -10,7 +10,8 @@ import Foundation;
 import UIKit;
 import Disk;
 
-let pathToFavouritesIds = "Recipes/favouriteData.json"
+let pathToFavouritesIds = "Recipes/favouriteData.json";
+let pathToShoppingList = "Recipes/shoppinglistData.json";
 
 class RecipeOverviewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
 	
@@ -98,6 +99,9 @@ class RecipeOverviewController: UIViewController,UITableViewDelegate,UITableView
 		isFavourited = !isFavourited;
 		isFavouritedChanged = true;
 		favouritesIcon.image = isFavourited ? UIImage(named: "Apple") : UIImage(named: "Avocado");
+	}
+	@IBAction func addToShoppingcartHandler(_ sender: Any) {
+		try? Disk.save(recipeModel?.ingredients, to: .caches, as: pathToShoppingList,encoder:JSONEncoder());
 	}
 	
 	override func viewWillDisappear(_ animated: Bool) {
