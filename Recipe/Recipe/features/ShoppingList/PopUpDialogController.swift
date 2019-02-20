@@ -16,34 +16,53 @@ class PopupDialogController: UIViewController,UIGestureRecognizerDelegate {
 	@IBOutlet var contentView: UIView!;
 	@IBOutlet weak var searchInput: SearchTextField!
 	
-	var selectedItem:ShoppingListData?=nil;
-	var products:Array<SearchTextFieldItem> = []; // сложи всички продукти от firebase тук
-	var add:(_ item:ShoppingListData)->Void = { (item) in return };
+	var selectedItem:Ingredient?=nil;
+	var products:Array<Ingredient> = [] // сложи всички продукти от firebase тук
+	var add:(_ item:Ingredient)->Void = { (item) in return };
 	var cancel: ()->Void = { () in return };
 	
 	@IBAction func cancelHandler(_ sender: Any) {
-		self.cancel();
-		self.dismiss(animated: true, completion: nil);
+		self._cancel();
 	}
 	
+	@IBAction func viewTapCancel(_ sender: Any) {
+		self._cancel();
+	}
 	@IBAction func addHandler(_ sender: UIButton) {
-		let itemQuantity:Int = self.itemQuantity.text != nil && self.itemQuantity.text != "" ? Int(self.itemQuantity.text!)! : 0;
-		self.selectedItem?.itemCount = itemQuantity
+		self._addHandler();
+	}
+	
+	@IBAction func viewTapAction(_ sender: Any) {
+		self._addHandler();
+	}
+	
+	func _addHandler(){
+		let itemQuantity:Float = self.itemQuantity.text != nil && self.itemQuantity.text != "" ? Float(self.itemQuantity.text!)! : 0.0;
+		
+		self.selectedItem?.quantity = itemQuantity
 		if self.selectedItem != nil {
 			self.add(self.selectedItem!);
 		}
 		self.dismiss(animated: true, completion: nil);
-		
 	}
+	
+	func _cancel(){
+		self.cancel();
+		self.dismiss(animated: true, completion: nil);
+	}
+	
 	@IBAction func tapAction(_ sender: Any) {
 		searchInput.endEditing(true);
 		itemQuantity.endEditing(true);
 	}
+	
 	override func viewDidAppear(_ animated: Bool) {
 		searchInput.becomeFirstResponder();
-		searchInput.filterItems(products);
+		searchInput.filterItems(Array(cachedIngredientList).map { (_,value) in
+			return value;
+		});
 		searchInput.itemSelectionHandler = { item, itemPosition in
-			self.selectedItem =  item[0] as? ShoppingListData;
+			self.selectedItem =  item[0] as? Ingredient;
 			self.searchInput.text = self.selectedItem?.title;
 		}
 	}

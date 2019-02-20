@@ -8,7 +8,7 @@
 
 import UIKit
 import Firebase
-var cachedIngredientList: [String: [String: String]] = [:]
+var cachedIngredientList: [String: Ingredient] = [:]
 var cachedRecipeIDS: [String: String] = [:]
 
 

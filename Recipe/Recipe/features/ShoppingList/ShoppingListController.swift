@@ -14,40 +14,37 @@ import SearchTextField;
 
 class ShoppingListController: UIViewController,UITableViewDelegate,UITableViewDataSource {
 	
-	var tableData:Array<ShoppingListData> = [];
+	var tableData:Array<Ingredient> = []{
+		didSet {
+			if tableData.count > 0 {
+				self.emptyListPlaceholder.isHidden=true;
+			}else{
+				self.emptyListPlaceholder.isHidden=false;
+			}
+		}
+	};
+	
+	@IBOutlet weak var emptyListPlaceholder: UIView!
 	@IBOutlet weak var table: UITableView!
+	
+	override func viewDidAppear(_ animated: Bool) {
+		super.viewDidAppear(animated);
+//		self.tableData
+	}
 	
 	override func viewWillAppear(_ animated: Bool) {
 		
-		let decoder = JSONDecoder()
-		//		decoder.keyDecodingStrategy = .convertFromSnakeCase
+		let decoder = JSONDecoder();
+		
 		let encoder = JSONEncoder();
-		let mockData = [ShoppingListData(name: "Спанак", count: 2, units: "кутии", imagePath: "Apple"),
-						ShoppingListData(name: "Чери домати", count: 100, units: "гр.", imagePath: "Apple"),
-						ShoppingListData(name: "Картофи", count: 1, units: "кг.", imagePath: "Apple"),
-						ShoppingListData(name: "Свинско месо", count: 300, units: "гр.", imagePath: "Apple"),
-						ShoppingListData(name: "Спанак", count: 2, units: "кутии", imagePath: "Apple"),
-						ShoppingListData(name: "Чери домати", count: 100, units: "гр.", imagePath: "Apple"),
-						ShoppingListData(name: "Картофи", count: 1, units: "кг.", imagePath: "Apple"),
-						ShoppingListData(name: "Свинско месо", count: 300, units: "гр.", imagePath: "Apple"),
-						ShoppingListData(name: "Спанак", count: 2, units: "кутии", imagePath: "Apple"),
-						ShoppingListData(name: "Чери домати", count: 100, units: "гр.", imagePath: "Apple"),
-						ShoppingListData(name: "Картофи", count: 1, units: "кг.", imagePath: "Apple"),
-						ShoppingListData(name: "Свинско месо", count: 300, units: "гр.", imagePath: "Apple"),
-						ShoppingListData(name: "Спанак", count: 2, units: "кутии", imagePath: "Apple"),
-						ShoppingListData(name: "Чери домати", count: 100, units: "гр.", imagePath: "Apple"),
-						ShoppingListData(name: "Картофи", count: 1, units: "кг.", imagePath: "Apple"),
-						ShoppingListData(name: "Свинско месо", count: 300, units: "гр.", imagePath: "Apple"),
-						ShoppingListData(name: "Спанак", count: 2, units: "кутии", imagePath: "Apple"),
-						ShoppingListData(name: "Чери домати", count: 100, units: "гр.", imagePath: "Apple"),
-						ShoppingListData(name: "Картофи", count: 1, units: "кг.", imagePath: "Apple"),
-						ShoppingListData(name: "Свинско месо", count: 300, units: "гр.", imagePath: "Apple")];
-		try? Disk.save(mockData, to: Disk.Directory.caches, as: "Recipes/shoppinglistData.json",encoder:encoder);
+		try? Disk.save(tableData, to: Disk.Directory.caches, as: "Recipes/shoppinglistData.json",encoder:encoder);
 		
-		
-		let data = try? Disk.retrieve("Recipes/shoppinglistData.json", from: Disk.Directory.caches, as: [ShoppingListData].self, decoder: decoder);
-		if data != nil {
+		let data = try? Disk.retrieve("Recipes/shoppinglistData.json", from: Disk.Directory.caches, as: [Ingredient].self, decoder: decoder);
+//		TEST
+//		data = tableData;
+		if data != nil && data!.count > 0 {
 			self.tableData = data!;
+			self.emptyListPlaceholder.isHidden=true;
 		}else{
 			self.tableData = [];
 		}
@@ -58,12 +55,12 @@ class ShoppingListController: UIViewController,UITableViewDelegate,UITableViewDa
 			self.tableData.remove(at: index);
 			let indexPath = IndexPath(item:index,section:0);
 			self.table.deleteRows(at: [indexPath], with: .left);
-			}
-//		do {
-//			try Disk.remove("Recipes/shoppinglistData.json", from: .caches)
-//		} catch {
-//			print("Cannot delete shopping list!")
-//		}
+		}
+		do {
+			try Disk.remove("Recipes/shoppinglistData.json", from: .caches)
+		} catch {
+			print("Cannot delete shopping list!")
+		}
 	}
 	
 	@IBAction func addButtonHandler(_ sender: UIButton) {
@@ -76,7 +73,7 @@ class ShoppingListController: UIViewController,UITableViewDelegate,UITableViewDa
 		let popupVC = self.storyboard?.instantiateViewController(withIdentifier: "popupDialog") as! PopupDialogController;
 		popupVC.products = self.tableData;
 		
-		popupVC.add = { (item:ShoppingListData) in
+		popupVC.add = { (item:Ingredient) in
 			var location = -1;
 			for (index, value) in self.tableData.enumerated(){
 				if value.title == item.title{
@@ -86,7 +83,7 @@ class ShoppingListController: UIViewController,UITableViewDelegate,UITableViewDa
 			}
 			if location != -1 {
 				let tableCell = self.table.cellForRow(at: IndexPath(row: location, section: 0)) as! ShoppingListTableRow;
-				tableCell.itemCount?.text = String(Int((tableCell.itemCount?.text)!)! + item.itemCount);
+				tableCell.itemCount?.text = String(Float((tableCell.itemCount?.text)!)! + item.quantity);
 			} else {
 				self.tableData.append(item);
 				self.table.beginUpdates();
@@ -138,30 +135,34 @@ class ShoppingListTableRow: UITableViewCell {
 	@IBOutlet weak var itemCount: UILabel!
 	@IBOutlet weak var units: UILabel!
 	
-	func initInternal(rowData data:ShoppingListData) -> Void {
+	func initInternal(rowData data:Ingredient) -> Void {
 		self.itemName?.text = data.title;
-		self.itemCount?.text = "\(data.itemCount)";
+		self.itemCount?.text = "\(data.quantity)";
 		self.imageView?.image = data.image;
-		self.units?.text = data.units;
+		self.units?.text = data.measuringUnit.0;
 	}
 	
 	@IBAction func addQuantity(_ sender: UIButton) {
-		self.itemCount.text = "\(Int(self.itemCount.text!)! + findDelta())";
+		let textAsFloat = Float(itemCount?.text ?? "1")!;
+		let newText = textAsFloat + findDelta();
+		self.itemCount.text = "\(newText)";
 	}
 	
 	@IBAction func removeQuantity(_ sender: UIButton) {
-		self.itemCount.text = "\(Int(self.itemCount.text!)! - findDelta())";
+		let textAsFloat = Float(itemCount?.text ?? "1")!
+		let newText = textAsFloat - findDelta();
+		self.itemCount.text = "\(newText)";
 		if self.itemCount.text == "0" {
 			sender.isEnabled = false;
 		}
 	}
 	
-	func findDelta()->Int{
+	func findDelta()->Float{
 		switch(self.units?.text){
-		case "кг.": return 1;
-		case "гр.":
+		case "kg.": return 1;
+		case "gr.","ml":
 			if let len = self.itemCount.text?.count {
-				return NSDecimalNumber(decimal: pow(10,len-1)).intValue;
+				return NSDecimalNumber(decimal: pow(10,len-1)).floatValue;
 			}else{
 				return 1;
 			}
@@ -174,52 +175,52 @@ class ShoppingListTableRow: UITableViewCell {
 	}
 }
 
-final class ShoppingListData:SearchTextFieldItem,Decodable {
-//	let image:UIImage?;
-	private var imageName:String;
-//	let itemName:String;
-	var itemCount:Int;
-	var units:String ;
-	
-	enum CodingKeys: String, CodingKey
-	{
-		case title
-		case itemCount
-		case units
-		case imageName
-	}
-	
-	init(name itemName:String,count itemCount: Int,units:String,imagePath imageName:String) {
-		let img = UIImage(named: imageName);
-		self.itemCount = itemCount;
-		self.units = units;
-		self.imageName = imageName;
-		super.init(title: itemName,subtitle: "",image: img);
-	}
-	
-	init(from decoder: Decoder) throws
-	{
-		let values = try decoder.container(keyedBy: CodingKeys.self);
-		let title = try values.decode(String.self, forKey: .title);
-		self.imageName = try values.decode(String.self, forKey: .imageName);
-		let image = UIImage(named: self.imageName);
-		self.itemCount = try values.decode(Int.self, forKey: .itemCount)
-		self.units = try values.decode(String.self, forKey: .units);
-		super.init(title:title,subtitle:"",image:image);
-	}
-}
-
-extension ShoppingListData: Encodable
-{
-	func encode(to encoder: Encoder) throws
-	{
-		var container = encoder.container(keyedBy: CodingKeys.self)
-		try container.encode(title, forKey: .title);
-		try container.encode(itemCount, forKey: .itemCount);
-		try container.encode(units, forKey: .units);
-		try container.encode(imageName, forKey: .imageName);
-	}
-}
+//final class ShoppingListData:SearchTextFieldItem,Decodable {
+////	let image:UIImage?;
+//	private var imageName:String;
+////	let itemName:String;
+//	var itemCount:Int;
+//	var units:String ;
+//
+//	enum CodingKeys: String, CodingKey
+//	{
+//		case title
+//		case itemCount
+//		case units
+//		case imageName
+//	}
+//
+//	init(name itemName:String,count itemCount: Int,units:String,imagePath imageName:String) {
+//		let img = UIImage(named: imageName);
+//		self.itemCount = itemCount;
+//		self.units = units;
+//		self.imageName = imageName;
+//		super.init(title: itemName,subtitle: "",image: img);
+//	}
+//
+//	init(from decoder: Decoder) throws
+//	{
+//		let values = try decoder.container(keyedBy: CodingKeys.self);
+//		let title = try values.decode(String.self, forKey: .title);
+//		self.imageName = try values.decode(String.self, forKey: .imageName);
+//		let image = UIImage(named: self.imageName);
+//		self.itemCount = try values.decode(Int.self, forKey: .itemCount)
+//		self.units = try values.decode(String.self, forKey: .units);
+//		super.init(title:title,subtitle:"",image:image);
+//	}
+//}
+//
+//extension ShoppingListData: Encodable
+//{
+//	func encode(to encoder: Encoder) throws
+//	{
+//		var container = encoder.container(keyedBy: CodingKeys.self)
+//		try container.encode(title, forKey: .title);
+//		try container.encode(itemCount, forKey: .itemCount);
+//		try container.encode(units, forKey: .units);
+//		try container.encode(imageName, forKey: .imageName);
+//	}
+//}
 
 //extension ShoppingListData: Decodable
 //{

@@ -10,27 +10,86 @@ import Foundation
 import UIKit
 import Firebase
 import PromiseKit
+import SearchTextField;
 
 var ref: DatabaseReference! = Database.database().reference(withPath: "/")
 
-class Ingredient {
+final class Ingredient:SearchTextFieldItem,Decodable {
 	var key: String = "";
-	var name: String = "";
 	var quantity: Float = 0.0;
 	var measuringUnit: (String, String) = ("kg", "gr");
-	var image: UIImage? = nil;
+	var name: String {
+		get { return self.title }
+	}
+	
+//	USE TITLE FROM SearchTextFieldItem
+//	var name: String = "";
+//	USE IMAGE FROM SearchTextFieldItem
+//	var image: UIImage? = nil;
+	
+	enum CodingKeys: String, CodingKey
+	{
+		case key
+		case name
+		case quantity
+		case measuringUnitMin
+		case measuringUnitMax
+	}
 	
     init(key: String, quantity: Float){
 		self.key = key
 		self.quantity = quantity
-		self.name = cachedIngredientList[key]?["name"] ?? key
-		if cachedIngredientList[key]?["isLiquid"] == "true" {
-			self.measuringUnit = ("l", "ml")
-		}else if cachedIngredientList[key]?["isQuantity"] == "true" {
-			self.measuringUnit = ("","")
-		}
+		self.measuringUnit = (cachedIngredientList[key]?.measuringUnit)!;
+		
+		let title = cachedIngredientList[key]?.name ?? key
+		super.init(title: title)
 		self.image = UIImage.getImageOrDefault(named: key)
     }
+	init(key:String, name:String, isLiquid: Bool, isQuantity: Bool) {
+		self.key = key;
+		self.quantity = 0;
+		if isLiquid == true {
+			self.measuringUnit = ("l", "ml")
+		}else if isQuantity == true {
+			self.measuringUnit = ("","")
+		}
+		super.init(title: name)
+		self.image = UIImage.getImageOrDefault(named: key);
+	}
+	
+	init(key:String,name:String, quantity: Float,measuringUnit:(String, String)) {
+		self.key = key;
+		super.init(title:name);
+		self.quantity = quantity;
+		self.measuringUnit = measuringUnit;
+		self.image = UIImage.getImageOrDefault(named: key);
+	}
+	
+	init(from decoder: Decoder) throws
+	{
+		let values = try decoder.container(keyedBy: CodingKeys.self);
+		self.key = try values.decode(String.self, forKey: .key);
+		self.quantity = try values.decode(Float.self, forKey: .quantity)
+		let measuringUnitMin = try values.decode(String.self, forKey: .measuringUnitMin);
+		let measuringUnitMax = try values.decode(String.self, forKey: .measuringUnitMax);
+		self.measuringUnit = (measuringUnitMin,measuringUnitMax);
+		let title = try values.decode(String.self, forKey: .name);
+		super.init(title:title);
+		self.image = UIImage.getImageOrDefault(named: key);
+	}
+}
+
+extension Ingredient: Encodable
+{
+	func encode(to encoder: Encoder) throws
+	{
+		var container = encoder.container(keyedBy: CodingKeys.self)
+		try container.encode(key, forKey: .key);
+		try container.encode(title, forKey: .name);
+		try container.encode(quantity, forKey: .quantity);
+		try container.encode(measuringUnit.0, forKey: .measuringUnitMin);
+		try container.encode(measuringUnit.1, forKey: .measuringUnitMin);
+	}
 }
 
 protocol ShortRecipeProtocol {
