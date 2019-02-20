@@ -13,6 +13,7 @@ import SearchTextField;
 
 
 class CreateRecipeController: UIViewController,UITableViewDelegate,UITableViewDataSource,RemoveIngredientViewCellDelegate,AddIngredientViewCellDelegate {
+	@IBOutlet weak var ingredientsHeight: NSLayoutConstraint!
 	@IBOutlet weak var scrollContentView: NSLayoutConstraint!
 	@IBOutlet weak var scrollView: UIScrollView!
 	@IBOutlet weak var nameOfTheRecipeTextField: UITextField!
@@ -79,11 +80,12 @@ class CreateRecipeController: UIViewController,UITableViewDelegate,UITableViewDa
 		self.ingredientsTable.beginUpdates();
 		self.ingredientsTable.insertRows(at: [IndexPath(row: self.ingredients.count-1, section: 0)], with: .automatic);
 		self.ingredientsTable.endUpdates();
+		self.ingredientsHeight.constant += 45;
 	}
 	
 	func removeIngredientDelegateHandler(){
-		
-		
+		//add removing from Misho here
+		self.ingredientsHeight.constant -= 45;
 	}
 	
 	func tableCellFactory(identifier:String,indexPath:IndexPath)->UITableViewCell{
@@ -190,6 +192,8 @@ class AddingCell: IngredientsTableCell{
 				}
 			}
 			selectedIngredient?.quantity = Float(quantityField.text!) ?? 1;
+			let image = cachedIngredientList[(selectedIngredient?.key)!]?.image;
+			selectedIngredient?.image = image;
 			self.delegate?.addIngredientDelegateHandler(ingredient:selectedIngredient!);
 			self.quantityField.text = "";
 			self.ingredientTypeField.text="";
@@ -201,6 +205,7 @@ class AddingCell: IngredientsTableCell{
 		var ingredientItems:[Ingredient] = []
 		for (key,_) in Array(cachedIngredientList){
 			let item = Ingredient(key: key, quantity: 0);
+			item.image = nil;
 			ingredientItems.append(item);
 		}
 		self.ingredientTypeField.filterItems(ingredientItems);

@@ -256,6 +256,7 @@
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.58379335669999999" blue="0.1897892541" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="Mgo-Qo-ZFq" firstAttribute="trailing" secondItem="yqo-qB-Hcg" secondAttribute="trailing" id="5Fs-sm-3LS"/>
                             <constraint firstItem="Mgo-Qo-ZFq" firstAttribute="trailing" secondItem="Uit-1S-zGh" secondAttribute="trailing" id="HnE-I6-Ux6"/>
@@ -266,6 +267,9 @@
                             <constraint firstItem="yqo-qB-Hcg" firstAttribute="leading" secondItem="LUt-6q-xz7" secondAttribute="leadingMargin" constant="-20" id="zOL-J9-4gK"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Mgo-Qo-ZFq"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="FUP-HH-h5c" appends="YES" id="T2f-qb-zeu"/>
+                        </connections>
                     </view>
                     <connections>
                         <outlet property="favouritesIcon" destination="BaM-kg-p5b" id="fQK-wn-GY1"/>
@@ -290,6 +294,12 @@
                         <action selector="addToShoppingcartHandler:" destination="x8x-OF-8xA" id="4gn-Ef-5n7"/>
                     </connections>
                 </tapGestureRecognizer>
+                <screenEdgePanGestureRecognizer minimumNumberOfTouches="1" id="FUP-HH-h5c">
+                    <rectEdge key="edges" left="YES"/>
+                    <connections>
+                        <action selector="backToMainViewHandler:" destination="x8x-OF-8xA" id="zSe-oG-DtP"/>
+                    </connections>
+                </screenEdgePanGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-3717.3913043478265" y="-3533.7053571428569"/>
         </scene>

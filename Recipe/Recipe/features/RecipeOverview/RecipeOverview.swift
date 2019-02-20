@@ -51,6 +51,26 @@ class RecipeOverviewController: UIViewController,UITableViewDelegate,UITableView
 	@IBAction func backHandler(_ sender: UIButton) {
 		self.dismiss(animated: true, completion: nil);
 	}
+	
+	
+	@IBAction func backToMainViewHandler(_ sender: UIScreenEdgePanGestureRecognizer) {
+//		if sender.state == .began {
+//			sender.view?.frame.offsetBy(dx: 100, dy: 100);
+//		}
+		guard sender.view != nil else {return}
+		
+		if sender.state == .began || sender.state == .changed {
+			let translation = sender.translation(in: self.view)
+			// note: 'view' is optional and need to be unwrapped
+			sender.view!.center = CGPoint(x: sender.view!.center.x + translation.x, y: sender.view!.center.y + translation.y)
+			sender.setTranslation(CGPoint.zero, in: self.view)
+		}
+		if sender.state == .ended {
+			self.dismiss(animated: true, completion: nil);
+		}
+		
+	}
+	
 	override func viewDidAppear(_ animated: Bool) {
 		instructionsView.sizeToFit();
 		instructionsView.isScrollEnabled = false;

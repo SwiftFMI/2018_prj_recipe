@@ -347,6 +347,7 @@
                     </tabBarItem>
                     <connections>
                         <outlet property="authorTextField" destination="kt9-w7-Wib" id="Nlq-nI-iTq"/>
+                        <outlet property="ingredientsHeight" destination="7Cc-qM-pj6" id="iQ1-VH-g5B"/>
                         <outlet property="ingredientsTable" destination="RsV-iq-6C8" id="bFN-Hl-2SL"/>
                         <outlet property="longDescriptionRecipeTextView" destination="uIZ-ou-htZ" id="vwH-U8-XOe"/>
                         <outlet property="nameOfTheRecipeTextField" destination="tqJ-zc-wDd" id="dyc-78-Zgl"/>
