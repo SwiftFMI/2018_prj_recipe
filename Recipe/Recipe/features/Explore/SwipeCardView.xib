@@ -29,14 +29,14 @@
                     <rect key="frame" x="0.0" y="44" width="375" height="734"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
-                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="22" translatesAutoresizingMaskIntoConstraints="NO" id="GbS-BD-4Dm">
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="22" translatesAutoresizingMaskIntoConstraints="NO" id="GbS-BD-4Dm">
                     <rect key="frame" x="0.0" y="44" width="375" height="734"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fQt-tU-cW2">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="400"/>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yze-TP-ErQ">
-                            <rect key="frame" x="0.0" y="422" width="375" height="90"/>
+                            <rect key="frame" x="151" y="422" width="73.333333333333314" height="90"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="90" id="RDE-qV-DrW"/>
                             </constraints>
@@ -45,7 +45,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oZv-Ir-dAq">
-                            <rect key="frame" x="0.0" y="534" width="375" height="70"/>
+                            <rect key="frame" x="28" y="534" width="319" height="70"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="70" id="UWa-5f-Lf8"/>
                             </constraints>
@@ -155,6 +155,9 @@
                             </constraints>
                         </view>
                     </subviews>
+                    <constraints>
+                        <constraint firstItem="oZv-Ir-dAq" firstAttribute="width" secondItem="GbS-BD-4Dm" secondAttribute="width" multiplier="0.85" id="3e4-DN-Cgq"/>
+                    </constraints>
                 </stackView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
