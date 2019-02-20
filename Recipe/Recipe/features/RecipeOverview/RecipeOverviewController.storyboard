@@ -35,6 +35,28 @@
                                             <action selector="backHandler:" destination="x8x-OF-8xA" eventType="touchUpInside" id="xjm-rP-ZxS"/>
                                         </connections>
                                     </button>
+                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="stR-bg-vgW" userLabel="FavouritesIconView">
+                                        <rect key="frame" x="335" y="0.0" width="60" height="60"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="BaM-kg-p5b">
+                                                <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
+                                                <gestureRecognizers/>
+                                            </imageView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <gestureRecognizers/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="BaM-kg-p5b" secondAttribute="trailing" id="1Rg-Ti-ugL"/>
+                                            <constraint firstAttribute="bottom" secondItem="BaM-kg-p5b" secondAttribute="bottom" id="DCh-iy-d1D"/>
+                                            <constraint firstItem="BaM-kg-p5b" firstAttribute="top" secondItem="stR-bg-vgW" secondAttribute="top" id="fSf-je-Cqo"/>
+                                            <constraint firstAttribute="width" constant="60" id="h36-oh-Eaa"/>
+                                            <constraint firstItem="BaM-kg-p5b" firstAttribute="leading" secondItem="stR-bg-vgW" secondAttribute="leading" id="ohz-Jy-Boj"/>
+                                            <constraint firstAttribute="height" constant="60" id="uwm-Js-PNZ"/>
+                                        </constraints>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="Bbg-wk-5ut" appends="YES" id="Wpf-oh-9ZI"/>
+                                        </connections>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="0.58379335669999999" blue="0.1897892541" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
@@ -43,6 +65,8 @@
                                     <constraint firstItem="2Vg-t1-ctv" firstAttribute="centerY" secondItem="Uit-1S-zGh" secondAttribute="centerY" id="Wd2-Hb-FSB"/>
                                     <constraint firstItem="VWn-cA-Ib6" firstAttribute="centerX" secondItem="Uit-1S-zGh" secondAttribute="centerX" id="bs3-ou-gsZ"/>
                                     <constraint firstItem="VWn-cA-Ib6" firstAttribute="centerY" secondItem="Uit-1S-zGh" secondAttribute="centerY" id="ftR-tt-yUn"/>
+                                    <constraint firstItem="stR-bg-vgW" firstAttribute="centerY" secondItem="Uit-1S-zGh" secondAttribute="centerY" id="nwz-mj-eoh"/>
+                                    <constraint firstAttribute="trailing" secondItem="stR-bg-vgW" secondAttribute="trailing" constant="20" id="u6n-5e-Sel"/>
                                 </constraints>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yqo-qB-Hcg">
@@ -220,6 +244,7 @@
                         <viewLayoutGuide key="safeArea" id="Mgo-Qo-ZFq"/>
                     </view>
                     <connections>
+                        <outlet property="favouritesIcon" destination="BaM-kg-p5b" id="fQK-wn-GY1"/>
                         <outlet property="ingredientsTable" destination="JPh-3h-zSk" id="A48-8h-51P"/>
                         <outlet property="ingredientsTableHeightConstraint" destination="hxU-dY-sgE" id="3yQ-sD-oAa"/>
                         <outlet property="instructionsView" destination="tqY-Oh-tO6" id="GKE-Le-MLJ"/>
@@ -231,8 +256,13 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r6H-2D-Rsb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="Bbg-wk-5ut">
+                    <connections>
+                        <action selector="addAndRemoveFromFavourites:" destination="x8x-OF-8xA" id="WU5-fI-u82"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-3717.3913043478265" y="-3533.152173913044"/>
+            <point key="canvasLocation" x="-3717.3913043478265" y="-3533.7053571428569"/>
         </scene>
     </scenes>
     <resources>

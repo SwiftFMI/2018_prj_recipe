@@ -8,12 +8,16 @@
 
 import Foundation;
 import UIKit;
+import Disk;
+
+let pathToFavouritesIds = "Recipes/favouriteData.json"
 
 class RecipeOverviewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
 	
 	
 	@IBOutlet weak var timeToPrepare: UILabel!
 	@IBOutlet weak var timeToCook: UILabel!
+	@IBOutlet weak var favouritesIcon: UIImageView!
 	
 	@IBOutlet weak var instructionsView: UITextView!
 	@IBOutlet weak var ingredientsTableHeightConstraint: NSLayoutConstraint!
@@ -23,6 +27,8 @@ class RecipeOverviewController: UIViewController,UITableViewDelegate,UITableView
 //    @IBOutlet weak var recipeDescription: UILabel!
 	@IBOutlet weak var ingredientsTable: UITableView!
 	
+	private var isFavourited = false;
+	private var isFavouritedChanged = false;
 	private var recipeModel: Recipe? = nil;
 	
 	func setModel(recipe data:Recipe){
@@ -62,11 +68,57 @@ class RecipeOverviewController: UIViewController,UITableViewDelegate,UITableView
 			self.ingredientsTableHeightConstraint.constant = CGFloat(tableHeight);
 			self.view.layoutIfNeeded();
 			self.ingredientsTable.tableFooterView = UIView(frame: .zero)
+			
+//			let favouritesIds:[String] = [];
+			if Disk.exists(pathToFavouritesIds, in: .caches){
+				let data = try? Disk.retrieve(pathToFavouritesIds, from: .caches, as: Set<String>.self, decoder: JSONDecoder())
+				if data != nil && data!.count > 0 {
+					if data?.first(where: {
+						$0 == self.recipeModel?.id;
+					}) != nil {
+						self.favouritesIcon.image = UIImage(named:"Apple");
+						self.isFavourited = true;
+					}else{
+						self.isFavourited = false;
+						self.favouritesIcon.image = UIImage(named: "Avocado");
+					}
+				}
+			}else {
+				self.favouritesIcon.image = UIImage(named: "Avocado");
+			}
+			
 		}
         super.viewDidLoad();
 	}
 	override func viewWillLayoutSubviews(){
 		super.viewWillLayoutSubviews();
+	}
+	
+	@IBAction func addAndRemoveFromFavourites(_ sender: Any) {
+		isFavourited = !isFavourited;
+		isFavouritedChanged = true;
+		favouritesIcon.image = isFavourited ? UIImage(named: "Apple") : UIImage(named: "Avocado");
+	}
+	
+	override func viewWillDisappear(_ animated: Bool) {
+		if(isFavouritedChanged) {
+			if(isFavourited){
+				let recipeIds = try? Disk.retrieve(pathToFavouritesIds, from: .caches, as: Set<String>.self, decoder: JSONDecoder())
+				if recipeIds != nil && recipeIds!.count > 0 {
+					if recipeIds!.filter({ $0 ==  self.recipeModel!.id }).count != 0{
+						return;
+					}
+					try? Disk.append(self.recipeModel!.id, to: pathToFavouritesIds, in: .caches);
+				}
+			} else {
+				let recipeIds = try? Disk.retrieve(pathToFavouritesIds, from: .caches, as: Set<String>.self, decoder: JSONDecoder())
+				if recipeIds != nil && recipeIds!.count > 0 {
+					let newIds =  recipeIds!.filter { $0 !=  self.recipeModel!.id }
+					try? Disk.remove(pathToFavouritesIds, from: .caches);
+					try? Disk.save(newIds, to: .caches, as: pathToFavouritesIds, encoder: JSONEncoder());
+				}
+			}
+		}
 	}
 }
 

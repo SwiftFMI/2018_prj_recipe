@@ -39,7 +39,7 @@ final class Ingredient:SearchTextFieldItem,Decodable {
     init(key: String, quantity: Float){
 		self.key = key
 		self.quantity = quantity
-		self.measuringUnit = (cachedIngredientList[key]?.measuringUnit)!;
+		self.measuringUnit = (cachedIngredientList[key] != nil ? cachedIngredientList[key]!.measuringUnit : ("",""));
 		
 		let title = cachedIngredientList[key]?.name ?? key
 		super.init(title: title)
