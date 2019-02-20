@@ -12,9 +12,9 @@ import Firebase;
 import SearchTextField;
 import PromiseKit;
 import Disk
+import Photos
 
-
-class CreateRecipeController: UIViewController,UITableViewDelegate,UITableViewDataSource,RemoveIngredientViewCellDelegate,AddIngredientViewCellDelegate {
+class CreateRecipeController: UIViewController,UITableViewDelegate,UITableViewDataSource,RemoveIngredientViewCellDelegate,AddIngredientViewCellDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 	@IBOutlet weak var ingredientsHeight: NSLayoutConstraint!
 	@IBOutlet weak var scrollContentView: NSLayoutConstraint!
 	@IBOutlet weak var scrollView: UIScrollView!
@@ -25,8 +25,69 @@ class CreateRecipeController: UIViewController,UITableViewDelegate,UITableViewDa
     @IBOutlet weak var timeToCookTextField: UITextField!
     @IBOutlet weak var authorTextField: UITextField!
 	@IBOutlet weak var ingredientsTable: UITableView!
-	
+    
+    @IBOutlet weak var recipeImage: UIImageView!
+    
 	var ingredients:[Ingredient] = [Ingredient(key: "Banana", quantity: 1)];
+    
+    let imagePicker = UIImagePickerController()
+    
+    var imageNsUrl = NSURL()
+    var imageUrl: String = ""
+    @IBAction func pickImageButtonAction(_ sender: UIButton) {
+        
+        let status = PHPhotoLibrary.authorizationStatus()
+        var access = false
+        switch status {
+        case .denied:
+            print("You don't have permission")
+        case .authorized:
+            print("You have permission to use photos")
+            access = true
+        case .notDetermined:
+            print("Status not determined")
+            PHPhotoLibrary.requestAuthorization { (newStatus) in
+                if(newStatus == .denied){
+                    print("You don't have permission again")
+                    access = false
+                }else if(newStatus == .authorized){
+                    print("You have access.")
+                    access = true
+                }
+            }
+        default:
+            print("Undefined.")
+            access = false
+        }
+        
+        if access {
+            imagePicker.allowsEditing = false
+            imagePicker.sourceType = .photoLibrary
+            
+            present(imagePicker, animated: true, completion: nil)
+        }
+        
+        
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] {
+            recipeImage.contentMode = .scaleAspectFit
+            recipeImage.image = pickedImage as? UIImage
+            
+            if let pickedUrl = info[UIImagePickerController.InfoKey.imageURL]{
+                imageNsUrl =  pickedUrl as! NSURL
+                imageUrl = imageNsUrl.absoluteString ?? ""
+            }
+            
+        }
+        
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
+    }
     
     @IBAction func createRecipe(_ sender: Any) {
         
@@ -125,6 +186,8 @@ class CreateRecipeController: UIViewController,UITableViewDelegate,UITableViewDa
 	
 	override func viewDidLoad() {
 		super.viewDidLoad();
+        
+        imagePicker.delegate = self
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {

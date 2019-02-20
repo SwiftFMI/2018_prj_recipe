@@ -39,7 +39,7 @@
                                 <rect key="frame" x="0.0" y="104" width="414" height="792"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ISL-Yi-y9H" userLabel="ContentView">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1070.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1268.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name of the recipe" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B3K-OQ-6xf">
                                                 <rect key="frame" x="134" y="15" width="146" height="20.5"/>
@@ -196,34 +196,34 @@
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rB2-M0-Di8">
-                                                                    <rect key="frame" x="8" y="5" width="0.0" height="33.5"/>
+                                                                    <rect key="frame" x="8" y="5" width="315" height="33.5"/>
                                                                     <subviews>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Ing." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rkw-il-2yP">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="33.5"/>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ing." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rkw-il-2yP">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="63" height="33.5"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eOR-g3-O8h" customClass="SearchTextField" customModule="SearchTextField">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="33.5"/>
+                                                                            <rect key="frame" x="63" y="0.0" width="126" height="33.5"/>
                                                                             <nil key="textColor"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                             <textInputTraits key="textInputTraits"/>
                                                                         </textField>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Qty." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="flG-y4-bQF">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="33.5"/>
+                                                                            <rect key="frame" x="189" y="0.0" width="31.5" height="33.5"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="joi-hp-3fi" customClass="SearchTextField" customModule="SearchTextField">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="33.5"/>
+                                                                            <rect key="frame" x="220.5" y="0.0" width="63" height="33.5"/>
                                                                             <nil key="textColor"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                             <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                                                                         </textField>
                                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V0c-q0-3ub">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="33.5"/>
+                                                                            <rect key="frame" x="283.5" y="0.0" width="31.5" height="33.5"/>
                                                                             <state key="normal" title="Add"/>
                                                                             <connections>
                                                                                 <action selector="addIngredient:" destination="yEE-wg-xrB" eventType="touchUpInside" id="1yr-pe-mhM"/>
@@ -263,8 +263,22 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="b8U-xn-PSL">
+                                                <rect key="frame" x="87" y="740.5" width="240" height="128"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="240" id="Ofb-Nc-CSv"/>
+                                                    <constraint firstAttribute="height" constant="128" id="pa0-Ck-adi"/>
+                                                </constraints>
+                                            </imageView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ddh-ER-kgE">
+                                                <rect key="frame" x="184" y="888.5" width="46" height="30"/>
+                                                <state key="normal" title="Button"/>
+                                                <connections>
+                                                    <action selector="pickImageButtonAction:" destination="m0f-aH-FnG" eventType="touchUpInside" id="HMF-oV-dj2"/>
+                                                </connections>
+                                            </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HI4-Mw-363">
-                                                <rect key="frame" x="158.5" y="740.5" width="97" height="30"/>
+                                                <rect key="frame" x="158.5" y="938.5" width="97" height="30"/>
                                                 <state key="normal" title="Create Recipe"/>
                                                 <connections>
                                                     <action selector="createRecipe:" destination="m0f-aH-FnG" eventType="touchUpInside" id="SDE-gD-BO3"/>
@@ -288,9 +302,11 @@
                                             <constraint firstItem="kt9-w7-Wib" firstAttribute="top" secondItem="as0-bE-p9t" secondAttribute="bottom" constant="10" id="L9B-Vk-fnr"/>
                                             <constraint firstItem="B3K-OQ-6xf" firstAttribute="centerX" secondItem="ISL-Yi-y9H" secondAttribute="centerX" id="Lnm-i4-cDg"/>
                                             <constraint firstItem="5VS-2L-fjN" firstAttribute="centerX" secondItem="ISL-Yi-y9H" secondAttribute="centerX" id="OLs-tg-c82"/>
+                                            <constraint firstItem="Ddh-ER-kgE" firstAttribute="top" secondItem="b8U-xn-PSL" secondAttribute="bottom" constant="20" id="QNY-LK-UV0"/>
                                             <constraint firstItem="hvx-OE-nOG" firstAttribute="centerX" secondItem="ISL-Yi-y9H" secondAttribute="centerX" id="SPV-U8-fYI"/>
                                             <constraint firstItem="5VS-2L-fjN" firstAttribute="top" secondItem="GbE-Eg-p3D" secondAttribute="bottom" constant="20" id="Wkh-CS-LBN"/>
                                             <constraint firstItem="as0-bE-p9t" firstAttribute="top" secondItem="gBW-YR-9VY" secondAttribute="bottom" constant="20" id="XxM-4a-HP2"/>
+                                            <constraint firstItem="b8U-xn-PSL" firstAttribute="top" secondItem="RsV-iq-6C8" secondAttribute="bottom" constant="20" id="YvR-3v-Qre"/>
                                             <constraint firstItem="as0-bE-p9t" firstAttribute="centerX" secondItem="ISL-Yi-y9H" secondAttribute="centerX" id="ZOm-Se-bwv"/>
                                             <constraint firstItem="xb7-ND-PQg" firstAttribute="top" secondItem="kt9-w7-Wib" secondAttribute="bottom" constant="20" id="cPG-Oi-mz4"/>
                                             <constraint firstItem="GbE-Eg-p3D" firstAttribute="top" secondItem="hvx-OE-nOG" secondAttribute="bottom" constant="10" id="dFJ-kO-7PL"/>
@@ -298,6 +314,7 @@
                                             <constraint firstItem="uIZ-ou-htZ" firstAttribute="top" secondItem="5VS-2L-fjN" secondAttribute="bottom" constant="10" id="eb3-oy-7C9"/>
                                             <constraint firstItem="GbE-Eg-p3D" firstAttribute="centerX" secondItem="ISL-Yi-y9H" secondAttribute="centerX" id="ems-LR-sXh"/>
                                             <constraint firstItem="RsV-iq-6C8" firstAttribute="width" secondItem="ISL-Yi-y9H" secondAttribute="width" multiplier="0.8" id="hCq-Dy-d9K"/>
+                                            <constraint firstItem="Ddh-ER-kgE" firstAttribute="centerX" secondItem="ISL-Yi-y9H" secondAttribute="centerX" id="hym-M2-UOk"/>
                                             <constraint firstItem="cvh-5t-gtq" firstAttribute="centerX" secondItem="nZ0-rf-tBf" secondAttribute="centerX" id="kFY-eO-Hye"/>
                                             <constraint firstItem="GbE-Eg-p3D" firstAttribute="width" secondItem="ISL-Yi-y9H" secondAttribute="width" multiplier="0.8" id="lcx-mS-Cll"/>
                                             <constraint firstItem="RsV-iq-6C8" firstAttribute="centerX" secondItem="ISL-Yi-y9H" secondAttribute="centerX" id="mVd-iy-wLk"/>
@@ -306,7 +323,8 @@
                                             <constraint firstItem="kt9-w7-Wib" firstAttribute="width" secondItem="ISL-Yi-y9H" secondAttribute="width" multiplier="0.8" id="p94-jy-D4y"/>
                                             <constraint firstItem="uIZ-ou-htZ" firstAttribute="width" secondItem="ISL-Yi-y9H" secondAttribute="width" multiplier="0.8" id="pZN-3U-6cU"/>
                                             <constraint firstItem="xb7-ND-PQg" firstAttribute="centerX" secondItem="ISL-Yi-y9H" secondAttribute="centerX" id="w7f-O9-nMj"/>
-                                            <constraint firstItem="HI4-Mw-363" firstAttribute="top" secondItem="RsV-iq-6C8" secondAttribute="bottom" constant="20" id="wgW-PD-cff"/>
+                                            <constraint firstItem="HI4-Mw-363" firstAttribute="top" secondItem="Ddh-ER-kgE" secondAttribute="bottom" constant="20" id="wgW-PD-cff"/>
+                                            <constraint firstItem="b8U-xn-PSL" firstAttribute="centerX" secondItem="ISL-Yi-y9H" secondAttribute="centerX" id="wqy-55-Gyt"/>
                                             <constraint firstItem="tqJ-zc-wDd" firstAttribute="centerX" secondItem="ISL-Yi-y9H" secondAttribute="centerX" id="wtM-RK-qml"/>
                                             <constraint firstItem="gBW-YR-9VY" firstAttribute="centerX" secondItem="V8c-ik-lNL" secondAttribute="centerX" id="wue-TO-jxY"/>
                                             <constraint firstItem="HI4-Mw-363" firstAttribute="centerX" secondItem="ISL-Yi-y9H" secondAttribute="centerX" id="xdx-vv-XGw"/>
@@ -351,6 +369,7 @@
                         <outlet property="ingredientsTable" destination="RsV-iq-6C8" id="bFN-Hl-2SL"/>
                         <outlet property="longDescriptionRecipeTextView" destination="uIZ-ou-htZ" id="vwH-U8-XOe"/>
                         <outlet property="nameOfTheRecipeTextField" destination="tqJ-zc-wDd" id="dyc-78-Zgl"/>
+                        <outlet property="recipeImage" destination="b8U-xn-PSL" id="n9p-lV-hfm"/>
                         <outlet property="scrollContentView" destination="WsK-UD-Bs4" id="ODG-1O-SMh"/>
                         <outlet property="scrollView" destination="AGY-In-epT" id="Eag-Xs-Zi1"/>
                         <outlet property="shortDescriptionRecipeTextView" destination="GbE-Eg-p3D" id="k9U-Rr-6gX"/>
