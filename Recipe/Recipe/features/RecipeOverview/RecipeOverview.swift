@@ -28,7 +28,8 @@ class RecipeOverviewController: UIViewController,UITableViewDelegate,UITableView
     @IBOutlet weak var recipeDescription: UITextView!
 	@IBOutlet weak var ingredientsTable: UITableView!
 	
-	private var isFavourited = false;
+    @IBOutlet weak var recipeImage: UIImageView!
+    private var isFavourited = false;
 	private var isFavouritedChanged = false;
 	private var recipeModel: Recipe? = nil;
 	
@@ -100,6 +101,7 @@ class RecipeOverviewController: UIViewController,UITableViewDelegate,UITableView
 			self.ingredientsTableHeightConstraint.constant = CGFloat(tableHeight);
 			self.view.layoutIfNeeded();
 			self.ingredientsTable.tableFooterView = UIView(frame: .zero)
+            self.recipeImage.image = recipeModel!.image ?? UIImage(named: "DefaulRecipeImage")
 			
 //			let favouritesIds:[String] = [];
 			if Disk.exists(pathToFavouritesIds, in: .caches){

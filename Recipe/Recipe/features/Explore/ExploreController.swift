@@ -151,6 +151,7 @@ extension ExploreController: KolodaViewDataSource {
         swiper.shorDescription = data.shortDescription
         swiper.timeToPrepare = data.timeToPrepare
         swiper.timeToCook = data.timeToCook
+        swiper.image = data.image 
         return swiper
         //return UIImageView(image: #imageLiteral(resourceName: "info.png"))
     }

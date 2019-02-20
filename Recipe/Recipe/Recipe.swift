@@ -124,14 +124,18 @@ struct RecipeShortData:ShortRecipeProtocol {
 	var name: String?
 	
 	var id: String
+    
+    var image: UIImage?
 	
-    init(timeToPrepare:String,timeToCook:String,shortDescription:String,shortIngredientList:String,name:String,id:String){
+    init(timeToPrepare:String,timeToCook:String,shortDescription:String,shortIngredientList:String,name:String,id:String, image: UIImage? = nil){
+        self.image = image;
 		self.id = id;
 		self.timeToCook = timeToCook;
         self.timeToPrepare = timeToPrepare
 		self.shortDescription = shortDescription;
 		self.shortIngredientList = shortIngredientList;
 		self.name = name;
+        
 	}
 }
 
@@ -148,6 +152,7 @@ class Recipe:ShortRecipeProtocol {
 	var isFull:Bool?;
     var shortIngredientList: String?
     var ingredients: [Ingredient] = []
+    var image: UIImage? = nil
 	
 	init(id:String){
 		self.id = id;
@@ -163,6 +168,7 @@ class Recipe:ShortRecipeProtocol {
 					self.shortDescription = data.shortDescription;
 					self.timeToPrepare = data.timeToPrepare;
 					self.timeToCook = data.timeToCook;
+                    self.image = data.image
 					dfd.resolve(self,nil);
 			}
 		}
