@@ -53,11 +53,15 @@
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <gestureRecognizers/>
                                         <constraints>
                                             <constraint firstItem="vez-Ew-dWw" firstAttribute="centerY" secondItem="6X1-f9-DO7" secondAttribute="centerY" id="Fg2-5N-dj4"/>
                                             <constraint firstItem="vez-Ew-dWw" firstAttribute="centerX" secondItem="6X1-f9-DO7" secondAttribute="centerX" id="hrn-uR-SPd"/>
                                             <constraint firstAttribute="height" constant="45" id="q3S-Rt-LQk"/>
                                         </constraints>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="qok-3V-wMo" appends="YES" id="5Ae-2P-ShX"/>
+                                        </connections>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ynR-2Y-dOz">
                                         <rect key="frame" x="86.999999999999986" y="223.66666666666669" width="161.66666666666663" height="45"/>
@@ -73,11 +77,15 @@
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" red="1" green="0.58379335669999999" blue="0.1897892541" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <gestureRecognizers/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="45" id="7gl-aq-CaS"/>
                                             <constraint firstItem="zKI-Kj-44Q" firstAttribute="centerX" secondItem="ynR-2Y-dOz" secondAttribute="centerX" id="95M-cb-oUn"/>
                                             <constraint firstItem="zKI-Kj-44Q" firstAttribute="centerY" secondItem="ynR-2Y-dOz" secondAttribute="centerY" id="BIo-ez-GuJ"/>
                                         </constraints>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="fB3-ne-BvW" appends="YES" id="zci-h8-FBF"/>
+                                        </connections>
                                     </view>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="0.58379335669999999" blue="0.1897892541" alpha="0.60011772260273977" colorSpace="custom" customColorSpace="displayP3"/>
@@ -125,13 +133,23 @@
                         <outlet property="delegate" destination="boM-8d-3DG" id="Eml-6O-VZT"/>
                     </connections>
                 </tapGestureRecognizer>
+                <tapGestureRecognizer id="fB3-ne-BvW">
+                    <connections>
+                        <action selector="viewTapAction:" destination="8Yo-x1-wdW" id="dNA-bn-PfV"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="qok-3V-wMo">
+                    <connections>
+                        <action selector="viewTapCancel:" destination="8Yo-x1-wdW" id="ChS-6d-NIB"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="3642.0289855072465" y="-522.32142857142856"/>
         </scene>
-        <!--Ingredients-->
+        <!--Shopping List-->
         <scene sceneID="Ffc-6b-enJ">
             <objects>
-                <viewController storyboardIdentifier="ShoppingListController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Zb4-8z-455" customClass="ShoppingListController" customModule="Recipe" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ShoppingListController" title="Shopping List" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Zb4-8z-455" userLabel="Shopping List" customClass="ShoppingListController" customModule="Recipe" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Gqu-OE-lLm" userLabel="Container" colorLabel="IBBuiltInLabel-Red">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -263,6 +281,23 @@
                                     <outlet property="delegate" destination="Zb4-8z-455" id="b6x-GM-Tdr"/>
                                 </connections>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ipm-BG-wgT">
+                                <rect key="frame" x="0.0" y="104" width="414" height="709"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Shopping List waits to be created...." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NOg-VZ-jgx">
+                                        <rect key="frame" x="45.333333333333343" y="0.0" width="323.66666666666663" height="709"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="NOg-VZ-jgx" firstAttribute="height" secondItem="Ipm-BG-wgT" secondAttribute="height" id="4SY-yO-ikW"/>
+                                    <constraint firstItem="NOg-VZ-jgx" firstAttribute="centerX" secondItem="Ipm-BG-wgT" secondAttribute="centerX" id="9QH-Gv-5uq"/>
+                                    <constraint firstItem="NOg-VZ-jgx" firstAttribute="centerY" secondItem="Ipm-BG-wgT" secondAttribute="centerY" id="Gwk-3x-mF0"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.58379335669999999" blue="0.1897892541" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
@@ -270,14 +305,19 @@
                             <constraint firstItem="HPs-R2-HxX" firstAttribute="top" secondItem="7AU-IE-VXy" secondAttribute="top" id="9zd-I1-mbk"/>
                             <constraint firstItem="aoH-no-pjN" firstAttribute="leading" secondItem="7AU-IE-VXy" secondAttribute="leading" id="A0n-28-s0v"/>
                             <constraint firstItem="7AU-IE-VXy" firstAttribute="trailing" secondItem="HPs-R2-HxX" secondAttribute="trailing" id="AIs-q2-x9K"/>
+                            <constraint firstItem="Ipm-BG-wgT" firstAttribute="width" secondItem="aoH-no-pjN" secondAttribute="width" id="ENR-1p-pC3"/>
+                            <constraint firstItem="Ipm-BG-wgT" firstAttribute="trailing" secondItem="7AU-IE-VXy" secondAttribute="trailing" id="Ew4-h1-veP"/>
                             <constraint firstItem="7AU-IE-VXy" firstAttribute="trailing" secondItem="aoH-no-pjN" secondAttribute="trailing" id="Fgn-Km-d5b"/>
                             <constraint firstItem="aoH-no-pjN" firstAttribute="bottom" secondItem="7AU-IE-VXy" secondAttribute="bottom" id="S4O-IP-mHk"/>
                             <constraint firstItem="aoH-no-pjN" firstAttribute="top" secondItem="HPs-R2-HxX" secondAttribute="bottom" id="WYA-ot-9s7"/>
+                            <constraint firstItem="Ipm-BG-wgT" firstAttribute="leading" secondItem="7AU-IE-VXy" secondAttribute="leading" id="Xhv-GZ-HT8"/>
+                            <constraint firstItem="Ipm-BG-wgT" firstAttribute="top" secondItem="HPs-R2-HxX" secondAttribute="bottom" id="j9y-2u-g34"/>
+                            <constraint firstItem="Ipm-BG-wgT" firstAttribute="bottom" secondItem="7AU-IE-VXy" secondAttribute="bottom" id="ph3-HV-tNX"/>
                             <constraint firstItem="aoH-no-pjN" firstAttribute="bottom" secondItem="7AU-IE-VXy" secondAttribute="bottom" id="shT-NU-haa"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="7AU-IE-VXy"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Ingredients" image="list.png" id="Qgh-x5-c3c" customClass="RAMAnimatedTabBarItem" customModule="RAMAnimatedTabBarController">
+                    <tabBarItem key="tabBarItem" title="Shopping list" image="list.png" id="Qgh-x5-c3c" userLabel="Shopping List" customClass="RAMAnimatedTabBarItem" customModule="RAMAnimatedTabBarController">
                         <connections>
                             <outlet property="animation" destination="8Wq-TT-h1O" id="Fdr-DU-TUO"/>
                         </connections>
@@ -285,6 +325,7 @@
                     <toolbarItems/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="emptyListPlaceholder" destination="Ipm-BG-wgT" id="T3F-0a-pML"/>
                         <outlet property="table" destination="aoH-no-pjN" id="D5p-gD-ZxN"/>
                     </connections>
                 </viewController>

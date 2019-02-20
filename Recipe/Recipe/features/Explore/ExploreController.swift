@@ -10,6 +10,7 @@ import Foundation;
 import UIKit;
 import Koloda;
 import PromiseKit;
+import Disk;
 
 class ExploreController: UIViewController {
     
@@ -24,10 +25,35 @@ class ExploreController: UIViewController {
 //    override func loadView() {
 //        super.loadView()
 //    }
-
+    
+    var favouritesIds: Set<String> = []
+    let pathToFavouritesIds = "Recipes/favouriteData.json"
+    override func viewWillDisappear(_ animated: Bool) {
+        let encoder = JSONEncoder()
+        try? Disk.save(favouritesIds, to: .caches, as: pathToFavouritesIds, encoder: encoder)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        
+        let decoder = JSONDecoder()
+        favouritesIds = []
+        if Disk.exists(pathToFavouritesIds, in: .caches){
+            let data = try? Disk.retrieve(pathToFavouritesIds, from: .caches, as: Set<String>.self, decoder: decoder)
+            if data != nil {
+                favouritesIds = data!
+            }
+        }
+        //try? Disk.remove(pathToFavouritesIds, from: .caches)
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-		
+        /*let encoder = JSONEncoder()
+        
+        favouritesIds.removeAll()
+        try? Disk.save(favouritesIds, to: Disk.Directory.caches, as: "Recipes/favouriteData.json", encoder: encoder)*/
 //		RecipeDatabase.getRecipe(id: <#T##String#>)
 		
 //		let defauiltShortRecipe = Recipe(id:"1")
@@ -36,6 +62,8 @@ class ExploreController: UIViewController {
 //        }
 //        defauiltShortRecipe.getShortRecipe(recipeID: "1")
         self.loadRecipesIntoKoloda()
+        
+        
         
 		loadingView.isHidden = false;
         kolodaView.layer.cornerRadius = 5
@@ -62,7 +90,7 @@ class ExploreController: UIViewController {
             }
         }
         
-        when(fulfilled: recepiesInitiator).done { (result:[Recipe]) in
+        _ = when(fulfilled: recepiesInitiator).done { (result:[Recipe]) in
             self.shortRecipes = result;
 
             if (self.usedRecipes.count == self.numberOfKolodaCartds) {
@@ -90,18 +118,23 @@ extension ExploreController: KolodaViewDelegate {
     
     func koloda(_ koloda: KolodaView, didSelectCardAt index: Int) {
         let recipeOverviewController = RecipeOverviewController.instantiate(fromAppStoryboard: .RecipeOverviewController);
-		shortRecipes[index].getFullRecipe()
-			.done{(recipe:Recipe) in
+		_ = shortRecipes[index].getFullRecipe()
+            .done{(recipe:Recipe) in
 				recipeOverviewController.setModel(recipe: recipe);
 				self.present(recipeOverviewController, animated: true, completion: nil);
 		}
+    }
+    
+    func koloda(_ koloda: KolodaView, didSwipeCardAt index: Int, in direction: SwipeResultDirection) {
+        if direction == .right {
+            favouritesIds.insert(shortRecipes[index].id)
+        }
     }
 }
 
 extension ExploreController: KolodaViewDataSource {
     func kolodaNumberOfCards(_ koloda: KolodaView) -> Int {
 		return self.numberOfKolodaCartds ;
-        
     }
     
     func kolodaSpeedThatCardShouldDrag(_ koloda: KolodaView) -> DragSpeed {

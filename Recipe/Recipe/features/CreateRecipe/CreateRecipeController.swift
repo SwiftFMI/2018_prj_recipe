@@ -13,6 +13,7 @@ import SearchTextField;
 
 
 class CreateRecipeController: UIViewController,UITableViewDelegate,UITableViewDataSource,RemoveIngredientViewCellDelegate,AddIngredientViewCellDelegate {
+	@IBOutlet weak var ingredientsHeight: NSLayoutConstraint!
 	@IBOutlet weak var scrollContentView: NSLayoutConstraint!
 	@IBOutlet weak var scrollView: UIScrollView!
 	@IBOutlet weak var nameOfTheRecipeTextField: UITextField!
@@ -74,17 +75,17 @@ class CreateRecipeController: UIViewController,UITableViewDelegate,UITableViewDa
 		}
 	}
 	
-	func addIngredientDelegateHandler(name:String,quantity:String){
-		let ingredient = Ingredient(key: name, quantity: Float(quantity)!);
+	func addIngredientDelegateHandler(ingredient:Ingredient) {
 		self.ingredients.append(ingredient);
 		self.ingredientsTable.beginUpdates();
 		self.ingredientsTable.insertRows(at: [IndexPath(row: self.ingredients.count-1, section: 0)], with: .automatic);
 		self.ingredientsTable.endUpdates();
+		self.ingredientsHeight.constant += 45;
 	}
 	
 	func removeIngredientDelegateHandler(){
-		
-		
+		//add removing from Misho here
+		self.ingredientsHeight.constant -= 45;
 	}
 	
 	func tableCellFactory(identifier:String,indexPath:IndexPath)->UITableViewCell{
@@ -144,7 +145,7 @@ protocol RemoveIngredientViewCellDelegate: AnyObject {
 }
 
 protocol AddIngredientViewCellDelegate: AnyObject {
-	func addIngredientDelegateHandler(name:String,quantity:String)
+	func addIngredientDelegateHandler(ingredient:Ingredient)
 }
 
 
@@ -174,41 +175,54 @@ class AddedCell: IngredientsTableCell {
 class AddingCell: IngredientsTableCell{
 	@IBOutlet weak var ingredientTypeField: SearchTextField!
 	@IBOutlet weak var quantityField: UITextField!
+	
 	weak var delegate : AddIngredientViewCellDelegate?;
-	var selectedIngredientKey:String?;
+	var selectedIngredient:Ingredient?;
+	
 	@IBAction func addIngredient(_ sender: UIButton) {
 		if let _ = delegate {
-			if selectedIngredientKey == nil{
-				self.selectedIngredientKey = Array(cachedIngredientList).first(where: {
-					$0.value["name"] == ingredientTypeField.text;
-				})?.key;
+			if selectedIngredient == nil {
+				let writenIngredient = Array(cachedIngredientList).first(where: {
+					$0.value.name == ingredientTypeField.text;
+				});
+				if writenIngredient != nil {
+					selectedIngredient = Ingredient(key: writenIngredient!.key, quantity: 0);
+				}else{
+					return;
+				}
 			}
-			self.delegate?.addIngredientDelegateHandler(name:self.selectedIngredientKey!,
-														quantity:quantityField.text != "" ? quantityField.text! : String(1));
+			selectedIngredient?.quantity = Float(quantityField.text!) ?? 1;
+			let image = cachedIngredientList[(selectedIngredient?.key)!]?.image;
+			selectedIngredient?.image = image;
+			self.delegate?.addIngredientDelegateHandler(ingredient:selectedIngredient!);
+			self.quantityField.text = "";
+			self.ingredientTypeField.text="";
+			self.ingredientTypeField.becomeFirstResponder();
 		}
 	}
 	
 	override func initInternal() {
-		var ingredientItems:[IngredientSearchItem] = []
-		for (key,value) in Array(cachedIngredientList){
-			let item = IngredientSearchItem(key:key, title: value["name"]!, subtitle: "", image:UIImage.getImageOrDefault(named: key));
+		var ingredientItems:[Ingredient] = []
+		for (key,_) in Array(cachedIngredientList){
+			let item = Ingredient(key: key, quantity: 0);
+			item.image = nil;
 			ingredientItems.append(item);
 		}
 		self.ingredientTypeField.filterItems(ingredientItems);
 		
 		self.ingredientTypeField.itemSelectionHandler = { filteredResults, itemPosition in
-			let item = filteredResults[itemPosition] as! IngredientSearchItem;
-			self.selectedIngredientKey = item.ingredientKey;
+			let item = filteredResults[itemPosition] as! Ingredient;
+			self.selectedIngredient = item;
 			self.ingredientTypeField.text = item.title;
 		}
 	}
 }
 
-class IngredientSearchItem:SearchTextFieldItem{
-	var ingredientKey:String="";
-	init(key:String,title: String, subtitle: String?, image: UIImage?) {
-		self.ingredientKey = key;
-		super.init(title: title);
-//		super.init(title: title, subtitle: subtitle, image: image);
-	}
-}
+//class IngredientSearchItem:SearchTextFieldItem{
+//	var ingredientKey:String="";
+//	init(key:String,title: String, subtitle: String?, image: UIImage?) {
+//		self.ingredientKey = key;
+//		super.init(title: title);
+////		super.init(title: title, subtitle: subtitle, image: image);
+//	}
+//}
