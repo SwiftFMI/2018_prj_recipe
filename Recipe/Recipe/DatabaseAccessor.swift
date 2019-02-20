@@ -41,8 +41,8 @@ class RecipeDatabase{
 				let shortRecipeData:RecipeShortData = RecipeShortData(
 					timeToPrepare: "\(snapshot.childSnapshot(forPath: "minutesToPrepare").value ?? "")",
 					timeToCook: "\(snapshot.childSnapshot(forPath: "minutesToCook").value ?? "")",
-					shortDescription: snapshot.childSnapshot(forPath: "shortDescription").value as! String,
-					shortIngredientList: snapshot.childSnapshot(forPath: "shortIngredientList").value as! String,
+					shortDescription: "\(snapshot.childSnapshot(forPath: "shortDescription").value ?? "")",
+                    shortIngredientList: "\(snapshot.childSnapshot(forPath: "shortIngredientList").value ?? "")",
 					name:"\(snapshot.childSnapshot(forPath: "name").value ?? "")",
 					id: id)
 				dfd.resolve(shortRecipeData, nil);

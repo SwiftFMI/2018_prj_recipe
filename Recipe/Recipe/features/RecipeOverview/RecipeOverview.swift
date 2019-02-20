@@ -35,6 +35,12 @@ class RecipeOverviewController: UIViewController,UITableViewDelegate,UITableView
 	func setModel(recipe data:Recipe){
 		self.recipeModel = data;
 	}
+    
+    private var backController : Any? = nil
+    
+    func setBackController(favouritesController: FavouritesController) -> Void {
+        self.backController = favouritesController;
+    }
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return (self.recipeModel?.ingredients.count)!;
@@ -49,7 +55,11 @@ class RecipeOverviewController: UIViewController,UITableViewDelegate,UITableView
 	}
 	
 	@IBAction func backHandler(_ sender: UIButton) {
-		self.dismiss(animated: true, completion: nil);
+        if self.backController != nil {
+            self.present(self.backController as! UIViewController, animated: true, completion: nil)
+        }else{
+            self.dismiss(animated: true, completion: nil);
+        }
 	}
 	
 	
@@ -74,7 +84,7 @@ class RecipeOverviewController: UIViewController,UITableViewDelegate,UITableView
 	override func viewDidAppear(_ animated: Bool) {
 		instructionsView.sizeToFit();
 		instructionsView.isScrollEnabled = false;
-		scrollView.contentSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height+instructionsView.frame.height);
+//        scrollView.contentSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height+instructionsView.frame.height);
 		
 	}
 	

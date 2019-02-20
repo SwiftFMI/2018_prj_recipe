@@ -10,6 +10,8 @@ import Foundation;
 import UIKit;
 import Firebase;
 import SearchTextField;
+import PromiseKit;
+import Disk
 
 
 class CreateRecipeController: UIViewController,UITableViewDelegate,UITableViewDataSource,RemoveIngredientViewCellDelegate,AddIngredientViewCellDelegate {
@@ -54,7 +56,35 @@ class CreateRecipeController: UIViewController,UITableViewDelegate,UITableViewDa
             "allIngredientIDs" : ["\(recipeID)" : "" ]
             ] as [String : Any]
         
-        ref.updateChildValues(recipeData)
+//        ref.updateChildValues(recipeData)
+        
+        let id = "1"
+        let recipe = Recipe(id: id)
+
+        _ = when(fulfilled: [recipe.getShortRecipe()]).done { (result: [Recipe]) in
+            _ = when(fulfilled: [recipe.getFullRecipe()]).done { (result: [Recipe]) in
+              
+                let recipeOverviewController = RecipeOverviewController.instantiate(fromAppStoryboard: .RecipeOverviewController);
+                let favouritesController = FavouritesController.instantiate(fromAppStoryboard: .Favourites);
+                recipeOverviewController.setModel(recipe: recipe);
+                recipeOverviewController.setBackController(favouritesController: favouritesController);
+                
+                var favouritesIds: Set<String> = []
+                let pathToFavouritesIds = "Recipes/favouriteData.json";
+                let decoder = JSONDecoder()
+                favouritesIds = []
+                if Disk.exists(pathToFavouritesIds, in: .caches){
+                    let data = try? Disk.retrieve(pathToFavouritesIds, from: .caches, as: Set<String>.self, decoder: decoder)
+                    if data != nil {
+                        favouritesIds = data!
+                    }
+                }
+                favouritesIds.insert(id);
+                try? Disk.save(favouritesIds, to: .caches, as: pathToFavouritesIds, encoder: JSONEncoder())
+                
+                self.present(recipeOverviewController, animated: true, completion: nil);
+            }
+        }
     }
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		// + 1 is cuz we want 1 extra cell for adding data
