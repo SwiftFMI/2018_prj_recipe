@@ -92,7 +92,6 @@ class ExploreController: UIViewController {
         
         _ = when(fulfilled: recepiesInitiator).done { (result:[Recipe]) in
             self.shortRecipes = result;
-
             if (self.usedRecipes.count == self.numberOfKolodaCartds) {
                 self.kolodaView.dataSource = self
                 self.kolodaView.delegate = self
@@ -100,6 +99,8 @@ class ExploreController: UIViewController {
             if self.loadingView.isHidden != true{
                 self.loadingView.isHidden = true
             }
+            
+            self.kolodaView.resetCurrentCardIndex()
         }
     }
 }
@@ -109,7 +110,6 @@ extension ExploreController: KolodaViewDelegate {
         let arrayWithAllUnusedRecipes = arrayWithAllRecipeIDS.filter { !usedRecipes.contains($0) }
         
         if arrayWithAllUnusedRecipes.count != 0{
-            kolodaView.resetCurrentCardIndex()
             self.loadRecipesIntoKoloda()
         }else{
             
