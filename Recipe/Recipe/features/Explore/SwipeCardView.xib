@@ -73,7 +73,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="13.666666666666666" height="60"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </view>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="clock.png" translatesAutoresizingMaskIntoConstraints="NO" id="Ttv-ai-ham">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="timer" translatesAutoresizingMaskIntoConstraints="NO" id="Ttv-ai-ham">
                                                     <rect key="frame" x="13.666666666666671" y="0.0" width="60" height="60"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="Ttv-ai-ham" secondAttribute="height" multiplier="1:1" id="F5q-9y-A1m"/>
@@ -110,7 +110,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="13.666666666666666" height="60"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </view>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pot.png" translatesAutoresizingMaskIntoConstraints="NO" id="r0M-OG-4D8">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pot" translatesAutoresizingMaskIntoConstraints="NO" id="r0M-OG-4D8">
                                                     <rect key="frame" x="13.666666666666686" y="0.0" width="60" height="60"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="r0M-OG-4D8" secondAttribute="height" multiplier="1:1" id="37q-vd-raw"/>
@@ -172,7 +172,7 @@
         </view>
     </objects>
     <resources>
-        <image name="clock.png" width="100" height="100"/>
-        <image name="pot.png" width="480" height="480"/>
+        <image name="pot" width="300" height="300"/>
+        <image name="timer" width="300" height="300"/>
     </resources>
 </document>

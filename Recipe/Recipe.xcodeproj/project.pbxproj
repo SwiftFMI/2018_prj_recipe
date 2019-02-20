@@ -39,7 +39,6 @@
 		2F1689CA2213222C00DCDFCE /* SwipeCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F1689C92213222C00DCDFCE /* SwipeCardView.xib */; };
 		2F1689CC221325B100DCDFCE /* SwipeCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F1689CB221325B100DCDFCE /* SwipeCardView.swift */; };
 		2F1689CF221347C500DCDFCE /* test.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2F1689CE221347C400DCDFCE /* test.jpg */; };
-		2F1689D12213547C00DCDFCE /* clock.png in Resources */ = {isa = PBXBuildFile; fileRef = 2F1689D02213547C00DCDFCE /* clock.png */; };
 		2F1689D7221356E600DCDFCE /* pot.png in Resources */ = {isa = PBXBuildFile; fileRef = 2F1689D6221356E600DCDFCE /* pot.png */; };
 		60D2A58B9A40625A8EC19649 /* Pods_Recipe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1224070E000FF020D0ED5C56 /* Pods_Recipe.framework */; };
 		A00B470021FFBAC800381BE7 /* ExploreController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00B46FF21FFBAC700381BE7 /* ExploreController.swift */; };
@@ -117,8 +116,7 @@
 		2F1689C92213222C00DCDFCE /* SwipeCardView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SwipeCardView.xib; sourceTree = "<group>"; };
 		2F1689CB221325B100DCDFCE /* SwipeCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeCardView.swift; sourceTree = "<group>"; };
 		2F1689CE221347C400DCDFCE /* test.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = test.jpg; sourceTree = "<group>"; };
-		2F1689D02213547C00DCDFCE /* clock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clock.png; sourceTree = "<group>"; };
-		2F1689D6221356E600DCDFCE /* pot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pot.png; sourceTree = "<group>"; };
+
 		6A7A0CC0F038DF56FC235EA9 /* Pods-Recipe.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Recipe.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Recipe/Pods-Recipe.debug.xcconfig"; sourceTree = "<group>"; };
 		7EDF995F694653170552A7D6 /* Pods-Recipe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Recipe.release.xcconfig"; path = "Pods/Target Support Files/Pods-Recipe/Pods-Recipe.release.xcconfig"; sourceTree = "<group>"; };
 		A00B46FF21FFBAC700381BE7 /* ExploreController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreController.swift; sourceTree = "<group>"; };
@@ -245,8 +243,6 @@
 				2F05250321FF97BD0043BD50 /* favourite.png */,
 				2F05250521FF97C10043BD50 /* favourite@2x.png */,
 				2F05250421FF97C00043BD50 /* favourite@3x.png */,
-				2F1689D6221356E600DCDFCE /* pot.png */,
-				2F1689D02213547C00DCDFCE /* clock.png */,
 			);
 			path = Icons;
 			sourceTree = "<group>";
@@ -464,7 +460,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2F1689D12213547C00DCDFCE /* clock.png in Resources */,
 				2F1689CA2213222C00DCDFCE /* SwipeCardView.xib in Resources */,
 				2F15EDB022139691007020E0 /* test4.jpg in Resources */,
 				2330CA65219C697A00E95BE3 /* LaunchScreen.storyboard in Resources */,
