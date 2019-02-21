@@ -37,11 +37,11 @@ class RecipeOverviewController: UIViewController,UITableViewDelegate,UITableView
 		self.recipeModel = data;
 	}
     
-    private var backController : Any? = nil
-    
-    func setBackController(favouritesController: FavouritesController) -> Void {
-        self.backController = favouritesController;
-    }
+	private var tabbarIndex : Int = 0
+	
+	func setBackControllerIndex(backControllerIndex: Int) -> Void {
+		self.tabbarIndex = backControllerIndex;
+	}
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return (self.recipeModel?.ingredients.count)!;
@@ -56,11 +56,9 @@ class RecipeOverviewController: UIViewController,UITableViewDelegate,UITableView
 	}
 	
 	@IBAction func backHandler(_ sender: UIButton) {
-        if self.backController != nil {
-            self.present(self.backController as! UIViewController, animated: true, completion: nil)
-        }else{
-            self.dismiss(animated: true, completion: nil);
-        }
+		self.dismiss(animated: true, completion: nil);
+		let root = (UIApplication.shared.keyWindow?.rootViewController as! TabBarController)
+		root.selectedIndex = tabbarIndex;
 	}
 	
 	

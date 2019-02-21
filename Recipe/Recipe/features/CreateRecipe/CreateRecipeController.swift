@@ -128,7 +128,7 @@ class CreateRecipeController: UIViewController,UITableViewDelegate,UITableViewDa
                 let recipeOverviewController = RecipeOverviewController.instantiate(fromAppStoryboard: .RecipeOverviewController);
                 let favouritesController = FavouritesController.instantiate(fromAppStoryboard: .Favourites);
                 recipeOverviewController.setModel(recipe: recipe);
-                recipeOverviewController.setBackController(favouritesController: favouritesController);
+				recipeOverviewController.setBackControllerIndex(backControllerIndex: 1);
                 
                 var favouritesIds: Set<String> = []
                 let pathToFavouritesIds = "Recipes/favouriteData.json";
